@@ -1,0 +1,791 @@
+/* ============================================================================
+   SIYA — redesign layer (loaded last, wins the cascade)
+     • Clean, modern, theme-aware foundation (light + dark)
+     • Hero intro: rough answer sheet → Siya scans → insight, mascot moves in,
+       then the titles roll. Subtle, efficient, failsafe.
+     • Mobile-solid responsive rules.
+   ========================================================================== */
+
+/* =========================================================================
+   0. THEME TOKENS
+   Keep the brand tint scales (primary-50…900 etc.) intact so small accents
+   (badges, avatars, the light "app screenshot" device mockups) stay vivid.
+   Only the semantic surface / text / border tokens flip for dark mode.
+   ========================================================================= */
+html[data-theme="dark"] {
+  --bg:            #131316;
+  --bg-soft:       #1A1A20;
+  --bg-muted:      #202027;
+  --surface:       #1C1C22;
+  --surface-alt:   #272231;
+  --fg:            #F3F1F8;
+  --fg-secondary:  #C9C5D4;
+  --fg-muted:      #9B97A8;
+  --fg-subtle:     #6E6A7A;
+  --border:        rgba(255,255,255,0.14);
+  --border-soft:   rgba(255,255,255,0.08);
+  --gray-200:      #2A2A31;   /* progress-bar tracks */
+  --gray-800:      #0C0C0E;   /* band + footer stay the darkest surface */
+}
+html { background: var(--bg); }
+body { background: var(--bg); transition: background 0.4s var(--ease-out), color 0.4s var(--ease-out); }
+
+/* marketing cards hardcode #fff in the base sheet — flip them to the surface
+   token in dark. Device mockups are intentionally left light (they read as
+   screenshots of the light Siya app). */
+html[data-theme="dark"] .reveal-card,
+html[data-theme="dark"] .aud-card,
+html[data-theme="dark"] .comm-card,
+html[data-theme="dark"] .test-card,
+html[data-theme="dark"] .stat-card,
+html[data-theme="dark"] .flow-body,
+html[data-theme="dark"] .insight-card,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .conv-card { background: var(--surface); }
+
+html[data-theme="dark"] .nav.scrolled { background: rgba(19,19,22,0.82); border-bottom-color: var(--border-soft); }
+html[data-theme="dark"] .nav.open .nav-links { background: var(--surface); border-bottom-color: var(--border-soft); }
+html[data-theme="dark"] .eyebrow { color: var(--primary-300); }
+html[data-theme="dark"] .reveal-card .ic,
+html[data-theme="dark"] .comm-card .ic { color: var(--primary-200); }
+html[data-theme="dark"] .reveal-card:hover .ic,
+html[data-theme="dark"] .comm-card:hover .ic { color: #fff; }
+html[data-theme="dark"] .bg-soft { background: var(--bg-soft); }
+html[data-theme="dark"] .test-feature { background: linear-gradient(135deg, #2A2140, #1C1C22); }
+html[data-theme="dark"] .test-feature .q { color: #ECE8FB; }
+html[data-theme="dark"] .stat-card:hover,
+html[data-theme="dark"] .comm-card:hover,
+html[data-theme="dark"] .test-card:hover,
+html[data-theme="dark"] .reveal-card:hover,
+html[data-theme="dark"] .aud-card:hover { box-shadow: var(--shadow-lg), 0 0 0 1px rgba(160,132,232,0.25); border-color: rgba(160,132,232,0.30); }
+html[data-theme="dark"] .device-rise { box-shadow: 0 40px 90px -40px rgba(0,0,0,0.7); }
+
+/* =========================================================================
+   1. THEME TOGGLE
+   ========================================================================= */
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.theme-toggle {
+  width: 42px; height: 42px; border-radius: 50%; flex: none;
+  display: grid; place-items: center; color: var(--fg-secondary);
+  background: var(--surface); border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-xs);
+  transition: color 0.2s var(--ease-out), background 0.2s var(--ease-out), transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+}
+.theme-toggle:hover { color: var(--primary-600); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.theme-toggle .i { width: 20px; height: 20px; }
+.theme-toggle .themo-sun { display: none; }
+.theme-toggle .themo-moon { display: block; }
+html[data-theme="dark"] .theme-toggle .themo-sun { display: block; }
+html[data-theme="dark"] .theme-toggle .themo-moon { display: none; }
+html[data-theme="dark"] .theme-toggle { background: rgba(255,255,255,0.05); }
+
+/* =========================================================================
+   2. HERO — clean background
+   ========================================================================= */
+.hero-center {
+  position: relative; overflow: hidden;
+  min-height: 100svh;
+  display: grid; align-items: center;
+  padding-top: clamp(104px, 13vh, 140px);
+  padding-bottom: clamp(48px, 7vh, 84px);
+  text-align: center;
+}
+.hero-bg { position: absolute; inset: 0; z-index: 0; background: var(--bg); }
+.hero-bg::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(64% 50% at 50% -4%, rgba(160,132,232,0.18) 0%, transparent 64%),
+    radial-gradient(40% 36% at 86% 28%, rgba(44,211,192,0.10) 0%, transparent 60%);
+}
+html[data-theme="dark"] .hero-bg::before {
+  background:
+    radial-gradient(64% 52% at 50% -4%, rgba(160,132,232,0.24) 0%, transparent 64%),
+    radial-gradient(42% 38% at 86% 26%, rgba(44,211,192,0.10) 0%, transparent 60%);
+}
+.hero-center .hero-stack {
+  position: relative; z-index: 2; width: 100%;
+  display: flex; flex-direction: column; align-items: center;
+  max-width: 980px; margin-inline: auto;
+}
+
+/* kicker pill */
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-ui); font-weight: 700; font-size: 13px;
+  letter-spacing: 0.03em; color: var(--primary-800);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-pill); padding: 9px 20px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: clamp(18px, 2.6vh, 32px);
+}
+html[data-theme="dark"] .hero-kicker { color: var(--primary-200); background: rgba(255,255,255,0.04); }
+.hero-kicker .spark { color: var(--secondary-600); font-size: 14px; }
+
+/* =========================================================================
+   3. HERO SCENE — conversion stage (rough sheet → insight) + mascot + chip
+   ========================================================================= */
+.hero-scene {
+  position: relative; display: grid; place-items: center;
+  width: min(540px, 88vw); aspect-ratio: 1 / 0.86;
+  margin: 0 auto clamp(6px, 1.6vh, 18px);
+}
+.hero-center .hero-mascot {
+  width: 56%; max-width: 290px; position: relative; z-index: 3;
+  filter: drop-shadow(0 28px 46px rgba(75,44,135,0.30));
+  animation: mascotFloat 6s var(--ease-in-out) infinite;
+}
+@keyframes mascotFloat { 0%,100% { transform: translateY(0) rotate(-1.2deg); } 50% { transform: translateY(-13px) rotate(1.2deg); } }
+
+/* --- conversion cards --- */
+.conv { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.conv-card {
+  position: absolute; text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: 13px 15px;
+}
+.cc-head { display: flex; align-items: center; gap: 8px; margin-bottom: 11px; }
+.cc-dots { display: flex; gap: 4px; }
+.cc-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--gray-300); display: block; }
+.cc-ttl { font-family: var(--font-ui); font-weight: 700; font-size: 11.5px; color: var(--fg-muted); letter-spacing: 0.01em; }
+.cc-live { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-ui); font-weight: 700; font-size: 10.5px; color: var(--secondary-700); }
+.cc-live i { width: 6px; height: 6px; border-radius: 50%; background: var(--secondary-500); display: block; }
+
+/* rough sheet */
+.conv-rough { width: min(244px, 62%); left: 50%; top: 44%; transform: translate(-50%,-50%) rotate(-3.5deg); opacity: 0; }
+.cc-rough-body { position: relative; display: grid; gap: 11px; padding: 4px 2px 8px; }
+.scrib { height: 7px; border-radius: 99px; background: repeating-linear-gradient(90deg, var(--gray-300) 0 14px, transparent 14px 22px); opacity: 0.8; }
+.scrib.w1 { width: 92%; } .scrib.w2 { width: 80%; } .scrib.w3 { width: 86%; } .scrib.short { width: 54%; }
+.cc-stamp {
+  position: absolute; right: -2px; bottom: -6px; transform: rotate(8deg);
+  font-family: var(--font-display); font-weight: 800; font-size: 22px; line-height: 1;
+  color: #C2410C; border: 2.5px solid #C2410C; border-radius: 9px; padding: 5px 9px;
+}
+.cc-stamp small { font-size: 12px; font-weight: 700; }
+
+/* insight card (final result) */
+.conv-insight { width: min(238px, 60%); right: -3%; bottom: 3%; }
+.cc-rows { display: grid; gap: 9px; }
+.cc-row { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 10px; }
+.cc-tag { font-family: var(--font-ui); font-weight: 700; font-size: 10.5px; letter-spacing: 0.02em; padding: 3px 8px; border-radius: var(--radius-pill); text-align: center; }
+.cc-tag.ok { background: var(--tag-success-bg); color: var(--tag-success-fg); }
+.cc-tag.mid { background: var(--tag-warn-bg); color: var(--tag-warn-fg); }
+.cc-tag.crit { background: var(--tag-error-bg); color: var(--tag-error-fg); }
+.cc-bar { height: 8px; border-radius: 99px; background: var(--gray-200); overflow: hidden; }
+.cc-bar b { display: block; height: 100%; width: var(--w); border-radius: 99px; background: var(--primary-500); }
+.cc-bar b.teal { background: var(--secondary-500); }
+
+/* scan line */
+.conv-scan {
+  position: absolute; left: 50%; top: 20%; width: min(250px, 64%); height: 4px; z-index: 3;
+  transform: translateX(-50%); border-radius: 4px; opacity: 0;
+  background: linear-gradient(90deg, transparent, var(--primary-400), var(--secondary-300), var(--primary-400), transparent);
+  box-shadow: 0 0 22px 5px rgba(160,132,232,0.7);
+}
+.conv-scan::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 42px;
+  background: linear-gradient(0deg, rgba(160,132,232,0.30), transparent);
+  border-radius: 4px;
+}
+
+/* chip (single, balanced upper-left) */
+.hero-center .chip { position: absolute; z-index: 4; top: 2%; left: -3%; }
+
+/* =========================================================================
+   4. HERO TITLES + oversized headline
+   ========================================================================= */
+.t-hero {
+  font-size: clamp(40px, 7.4vw, 88px);
+  line-height: 0.98; letter-spacing: -0.038em;
+  max-width: 15ch; margin: 6px auto 0;
+}
+.hero-strike {
+  font-family: var(--font-ui); font-weight: 700;
+  font-size: clamp(18px, 2.5vw, 30px); letter-spacing: -0.01em;
+  color: var(--fg-secondary); margin: 14px auto 0;
+}
+.strike-word { color: var(--fg-muted); text-decoration: line-through; text-decoration-color: var(--siya-orange); text-decoration-thickness: 3px; }
+.hero-center .lead { max-width: 52ch; margin: 20px auto 0; }
+.hero-center .hero-cta { justify-content: center; margin-top: clamp(26px, 3.6vh, 36px); }
+.hero-center .hero-note { justify-content: center; margin-top: 24px; }
+.hero-center .cue { color: var(--primary-400); }
+
+/* --- title lines are visible by default (failsafe); roll in only on play --- */
+.t-hero .ln .tl { display: inline-block; }
+
+/* =========================================================================
+   4b. HERO SPLIT — content left, animated scene right (tighter, catchier)
+   ========================================================================= */
+.hero-split { text-align: left; min-height: auto; padding-top: clamp(120px, 15vh, 168px); padding-bottom: clamp(56px, 8vh, 96px); }
+.hero-split .hero-stack {
+  display: grid; grid-template-columns: 1.04fr 0.96fr;
+  gap: clamp(32px, 4.8vw, 76px); align-items: center;
+  max-width: 1200px; text-align: left;
+}
+.hero-split .hero-copy { display: flex; flex-direction: column; align-items: flex-start; }
+.hero-split .hero-kicker { margin-bottom: clamp(16px, 2.2vh, 26px); }
+/* smaller, left-aligned headline so it reads as a hook, not a banner */
+.hero-split .t-hero { font-size: clamp(36px, 4.5vw, 62px); line-height: 1.0; max-width: 13ch; margin: 0; text-wrap: balance; }
+.hero-split .hero-strike { margin: 14px 0 0; }
+.hero-split .lead { max-width: 46ch; margin: 18px 0 0; }
+.hero-split .hero-cta { justify-content: flex-start; margin-top: clamp(24px, 3vh, 32px); }
+.hero-split .hero-note { justify-content: flex-start; margin-top: 22px; }
+/* scene fills its column; the cue lives under the copy on wide screens */
+.hero-split .hero-scene { width: 100%; max-width: 520px; margin: 0 auto; aspect-ratio: 1 / 0.9; }
+.hero-split .cue { display: none; }
+
+@media (max-width: 820px) {
+  .hero-split .hero-stack { grid-template-columns: 1fr; gap: 12px; max-width: 640px; justify-items: center; text-align: center; }
+  .hero-split { text-align: center; }
+  .hero-split .hero-copy { align-items: center; text-align: center; order: 2; }
+  .hero-split .hero-scene { order: 1; max-width: 440px; margin-bottom: 8px; }
+  .hero-split .t-hero { margin-inline: auto; }
+  .hero-split .lead { margin-inline: auto; }
+  .hero-split .hero-cta, .hero-split .hero-note { justify-content: center; }
+}
+
+/* =========================================================================
+   5. HERO INTRO TIMELINE  (only when .hero-play is present)
+   Base state above = final composition, so nothing depends on JS.
+   ========================================================================= */
+/* STAGE 1 — the worksheet flies in, is highlighted, then dwells */
+.hero-play .conv-rough {
+  animation: roughShow 3.1s var(--ease-out) 0.3s both,
+             roughGlow 3.1s var(--ease-in-out) 0.3s both;
+}
+@keyframes roughShow {
+  0%   { opacity: 0; transform: translate(-50%,-44%) rotate(-3.5deg) scale(0.84); }
+  9%   { opacity: 1; transform: translate(-50%,-50%) rotate(-3.5deg) scale(1.05); }
+  15%  { transform: translate(-50%,-50%) rotate(-3.5deg) scale(1); }
+  72%  { opacity: 1; transform: translate(-50%,-50%) rotate(-3.5deg) scale(1); }
+  100% { opacity: 0; transform: translate(-50%,-66%) rotate(-3.5deg) scale(0.9); }
+}
+@keyframes roughGlow {
+  0%, 7% { box-shadow: var(--shadow-xl); }
+  16%    { box-shadow: var(--shadow-xl), 0 0 0 3px rgba(160,132,232,0.45), 0 0 34px 8px rgba(160,132,232,0.35); }
+  66%    { box-shadow: var(--shadow-xl), 0 0 0 3px rgba(160,132,232,0.45), 0 0 34px 8px rgba(160,132,232,0.35); }
+  100%   { box-shadow: var(--shadow-xl); }
+}
+
+/* STAGE 2 — Siya scans the worksheet (an evident beam sweep) */
+.hero-play .conv-scan { animation: scanSweep 1.6s var(--ease-in-out) 1.35s 1 both; }
+@keyframes scanSweep {
+  0%   { opacity: 0; top: 30%; }
+  14%  { opacity: 1; }
+  86%  { opacity: 1; }
+  100% { opacity: 0; top: 60%; }
+}
+
+/* STAGE 3 — insight + mascot arrive together as the worksheet recedes */
+.hero-play .conv-insight { animation: insightIn 0.8s var(--ease-spring) 3.05s both; }
+@keyframes insightIn { from { opacity: 0; transform: translateY(24px) scale(0.88); } to { opacity: 1; transform: none; } }
+.hero-play .conv-insight .cc-bar b { animation: barGrow 0.75s var(--ease-out) 3.55s both; }
+@keyframes barGrow { from { width: 0; } to { width: var(--w); } }
+
+.hero-play .chip { animation: chipPop 0.6s var(--ease-spring) 3.4s both; }
+@keyframes chipPop { from { opacity: 0; transform: translateY(14px) scale(0.85); } to { opacity: 1; transform: none; } }
+
+.hero-play .hero-mascot {
+  animation: mascotMove 1.05s var(--ease-spring) 2.95s both,
+             mascotFloat 6s var(--ease-in-out) 4.05s infinite;
+}
+@keyframes mascotMove {
+  0%   { opacity: 0; transform: translateY(74px) scale(0.48) rotate(-8deg); }
+  55%  { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+
+/* titles roll AFTER the conversion */
+.hero-play .tl { animation: tlUp 0.6s var(--ease-out) var(--tld, 0s) both; }
+@keyframes tlUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+.hero-play .t-hero .ln .tl { animation: tlRoll 0.7s var(--ease-out) var(--tld, 0s) both; }
+@keyframes tlRoll { from { opacity: 0; transform: translateY(106%); } to { opacity: 1; transform: none; } }
+
+/* =========================================================================
+   6. THEME-COHESION (subtle, clean — no busy gradients)
+   ========================================================================= */
+.sec { padding-block: clamp(60px, 7vw, 108px); }
+.bg-soft { background: var(--bg-soft); }
+
+.head-block.center .eyebrow { position: relative; }
+.head-block.center .eyebrow::after {
+  content: ""; position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%);
+  width: 32px; height: 3px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--primary-500), var(--secondary-500));
+}
+.head-block.center { padding-bottom: 4px; }
+
+.band {
+  background:
+    radial-gradient(80% 140% at 12% 0%, rgba(160,132,232,0.20) 0%, transparent 60%),
+    radial-gradient(70% 130% at 92% 100%, rgba(44,211,192,0.14) 0%, transparent 60%),
+    var(--gray-800);
+  border-block: 1px solid rgba(255,255,255,0.06);
+}
+.band-num { font-size: clamp(34px, 4.4vw, 52px); }
+.device-rise { box-shadow: var(--shadow-xl), 0 40px 90px -52px rgba(75,44,135,0.45); }
+
+/* =========================================================================
+   7. RESPONSIVE / FOLD FIXES
+   ========================================================================= */
+@media (max-width: 1000px) {
+  .nav-actions { gap: 10px; }
+}
+/* collapse nav to a burger earlier so links never wrap / actions never clip */
+@media (max-width: 1024px) {
+  .nav .nav-links { display: none; }
+  .nav .nav-burger { display: flex; }
+  .nav.open .nav-links {
+    display: flex; position: absolute; top: 74px; left: 0; right: 0;
+    flex-direction: column; align-items: flex-start;
+    background: var(--surface); padding: 22px 28px; gap: 18px;
+    box-shadow: var(--shadow-lg); border-bottom: 1px solid var(--border-soft);
+  }
+  .nav.open .nav-links .nav-link { font-size: 16px; }
+}
+@media (max-width: 760px) {
+  .hero-center { padding-top: 96px; min-height: auto; padding-bottom: 56px; }
+  .hero-scene { width: min(420px, 92vw); aspect-ratio: 1 / 0.92; margin-bottom: 14px; }
+  .hero-center .hero-mascot { width: 58%; }
+  .conv-insight { right: 0; bottom: 2%; width: min(220px, 64%); }
+  .hero-center .chip-1 { left: 0; top: 2%; }
+  .hero-center .chip { padding: 9px 11px; }
+  .hero-center .chip .k { font-size: 15px; }
+  .hero-kicker { font-size: 11.5px; padding: 8px 14px; letter-spacing: 0.01em; }
+  .nav-cta { display: none; }            /* keep the bar clean; CTA lives in-page */
+  html[data-theme] .nav.open .nav-cta { display: none; }
+}
+@media (max-width: 460px) {
+  .hero-scene { aspect-ratio: 1 / 1.02; }
+  .conv-insight .cc-row { grid-template-columns: 56px 1fr; }
+  .hero-center .chip .l { display: none; }
+  .hero-center .chip { padding: 8px 10px; }
+  .t-hero { font-size: clamp(34px, 11vw, 52px); }
+}
+
+/* =========================================================================
+   8. REDUCED MOTION — show the final state, no intro motion
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .hero-center .hero-mascot { animation: none; }
+  .conv-rough { opacity: 0; }
+  .conv-scan { display: none; }
+  .tl { opacity: 1 !important; transform: none !important; }
+}
+
+/* =========================================================================
+   9. PROFESSIONAL COHESION PASS
+   One continuous, calm page: no scroll-jacking, no floating chrome,
+   one vertical rhythm, theme-true in light + dark.
+   ========================================================================= */
+
+/* --- 9.0 Retire the cinematic chrome (belt-and-suspenders; script removed) --- */
+.intro, .chapter-rail, .scene-steps, .focus-overlay, .fo-badge, .crl-spine { display: none !important; }
+.focusable { cursor: default; }
+
+/* --- 9.1 One vertical rhythm for every fold --- */
+:root { --fold: clamp(80px, 8.5vw, 124px); }
+.sec { padding-block: var(--fold) !important; }
+.sec-tight { padding-block: clamp(56px, 6vw, 84px) !important; }
+.hero-split { padding-bottom: clamp(64px, 8vh, 104px); }
+
+/* --- 9.2 Cinematic scroll scenes: re-pinned, clean & reasonable ---
+   Scenes pin via siya.css; siya.js scrubs --p / data-step. We only keep the
+   page calm (no scroll-cue chrome) and give the pinned stage tidy breathing room. */
+.cue { display: none !important; }
+.scene .pin { padding-inline: 0; }
+.exp-list .flow-step .flow-body { transition: box-shadow .45s var(--ease-out), border-color .45s var(--ease-out), transform .45s var(--ease-out); }
+
+/* --- 9.3 Consistent section-heading rhythm --- */
+.head-block { margin-bottom: clamp(40px, 4.5vw, 60px); }
+.head-block.center { margin-inline: auto; }
+.head-block + .device-rise,
+.head-block + .reveal-grid,
+.head-block + .aud-grid,
+.head-block + .comm-grid,
+.head-block + .stat-grid,
+.head-block + .test-grid { margin-top: 0 !important; }
+
+/* --- 9.4 HERO — tighter, professional alignment --- */
+.hero-split .hero-stack { align-items: center; }
+.hero-split .hero-scene { aspect-ratio: 1 / 0.92; }
+/* keep the floating chip clear of the insight card */
+.hero-split .chip-1 { top: 4%; left: -2%; }
+.hero-split .conv-insight { right: -2%; bottom: 6%; }
+.hero-strike { font-weight: 600; }
+
+/* =========================================================================
+   10. DARK THEME — make every surface read as intentionally dark
+   ========================================================================= */
+/* 10.1 Product mockups follow the theme. Their internals are built from the
+   LIGHT scale tokens (--primary-50 washes, --primary-800 text, etc.) — the dark
+   theme only flips the *semantic* tokens, not the scale. So in dark we re-map
+   the scale to a self-consistent dark palette INSIDE the mockup: the 50/100
+   washes become dark tints, the 600–900 text steps become light. The whole
+   product screen then reads as a real dark UI instead of a white patch. */
+html[data-theme="dark"] .device,
+html[data-theme="dark"] .xf-paper {
+  --primary-50:  rgba(160,132,232,0.10);
+  --primary-100: rgba(160,132,232,0.18);
+  --primary-600: #B9A2F0;
+  --primary-700: #C7B4F4;
+  --primary-800: #D9CDFB;
+  --secondary-50:  rgba(44,211,192,0.10);
+  --secondary-100: rgba(44,211,192,0.18);
+  --secondary-700: #6FE0D2;
+  --secondary-900: #A7EDE4;
+  --gray-200: rgba(255,255,255,0.10);
+  --gray-300: rgba(255,255,255,0.16);
+  background: #1C1C22; color: var(--fg);
+  box-shadow: 0 38px 92px -34px rgba(0,0,0,0.85), 0 0 0 1px rgba(160,132,232,0.16);
+}
+html[data-theme="dark"] .device-rise {
+  box-shadow: 0 46px 112px -40px rgba(0,0,0,0.9), 0 0 0 1px rgba(160,132,232,0.22);
+}
+/* hardcoded #fff fills inside the mockups → dark surface tiles */
+html[data-theme="dark"] .device .ud-file,
+html[data-theme="dark"] .device .ud-insight { background: rgba(255,255,255,0.05); border-color: var(--border-soft); }
+html[data-theme="dark"] .device .ud-drop .ic { background: rgba(255,255,255,0.06); box-shadow: none; color: var(--primary-700); }
+
+/* status numbers (gaps / scores) — dark-red & amber that read in both themes */
+.t-crit { color: #991B1B; }
+.t-warn { color: #854D0E; }
+html[data-theme="dark"] .t-crit { color: #FCA5A5; }
+html[data-theme="dark"] .t-warn { color: #FBD38D; }
+
+/* report “Siya” note + worksheet gap box: theme-aware fills (were inline #fff) */
+.rep-siya-box { display: flex; gap: 14px; align-items: flex-start; background: linear-gradient(120deg, var(--secondary-50), #fff); border: 1px solid var(--secondary-200); border-radius: var(--radius-lg); padding: 18px 20px; }
+html[data-theme="dark"] .rep-siya-box { background: linear-gradient(120deg, rgba(44,211,192,0.12), rgba(160,132,232,0.05)); border-color: rgba(44,211,192,0.24); }
+.xf-gap-box { border: 1px solid var(--tag-error-bg); border-radius: var(--radius-md); padding: 15px 16px; background: #FFF6F6; }
+html[data-theme="dark"] .xf-gap-box { background: rgba(248,113,113,0.10); border-color: rgba(248,113,113,0.30); }
+
+/* 10.1b Transformation scene — worksheet rows + insight popover go dark too
+   (they sit OUTSIDE .xf-paper, so the scale remap above doesn't reach them). */
+html[data-theme="dark"] .xf-a { background: rgba(255,255,255,0.05); border-color: var(--border-soft); color: var(--fg-secondary); }
+html[data-theme="dark"] .xf:not([data-step="0"]) .xf-a.gap { background: rgba(248,113,113,0.10); border-color: rgba(248,113,113,0.34); }
+html[data-theme="dark"] .xf-insight { background: var(--surface); border-color: rgba(160,132,232,0.32); box-shadow: 0 32px 76px -30px rgba(0,0,0,0.82), 0 0 0 1px rgba(160,132,232,0.16); }
+html[data-theme="dark"] .xf-insight .h { color: var(--primary-300); }
+html[data-theme="dark"] .xf-insight p { color: var(--fg-muted); }
+
+/* 10.1c Principal insight rows — hover used --primary-50 (a near-white wash);
+   in dark that flashed a white patch. Use a soft lavender tint instead. */
+html[data-theme="dark"] .ic-row:hover { background: rgba(160,132,232,0.10); }
+
+/* 10.1d How-it-works panels share one grid cell, so the card sizes to its
+   content (no dead space below) instead of all stretching to a fixed height. */
+.how2-demo { display: grid; min-height: 0; }
+.how2-demo .hp { position: relative; inset: auto; grid-area: 1 / 1; }
+@media (max-width: 1000px) { .how2-demo { display: block; } .how2-demo .hp { grid-area: auto; } }
+
+/* 10.2 Small light tiles that live INSIDE flipped (dark) marketing cards
+   would otherwise punch a bright hole — tint them to the dark palette. */
+html[data-theme="dark"] .aud-mini .m { background: rgba(160,132,232,0.10); }
+html[data-theme="dark"] .aud-mini .m.teal { background: rgba(44,211,192,0.10); }
+html[data-theme="dark"] .aud-mini .m .v { color: var(--primary-200); }
+html[data-theme="dark"] .aud-mini .m.teal .v { color: var(--secondary-300); }
+html[data-theme="dark"] .aud-mini .m .k { color: var(--fg-muted); }
+html[data-theme="dark"] .chatline { background: rgba(160,132,232,0.10); border-left-color: var(--primary-400); color: var(--fg-secondary); }
+html[data-theme="dark"] .reveal-card .ic,
+html[data-theme="dark"] .comm-card .ic { background: rgba(160,132,232,0.16); color: var(--primary-200); }
+html[data-theme="dark"] .test-card .test-av { background: rgba(160,132,232,0.18); color: var(--primary-100); }
+
+/* 10.3 Insight card (principals) — header band + text read correctly on dark */
+html[data-theme="dark"] .insight-card .ic-head {
+  background: linear-gradient(135deg, rgba(160,132,232,0.20), rgba(44,211,192,0.10));
+}
+html[data-theme="dark"] .ic-head .av { background: rgba(255,255,255,0.08); }
+html[data-theme="dark"] .ic-head .nm { color: var(--fg); }
+html[data-theme="dark"] .ic-head .rl { color: var(--fg-secondary); opacity: 1; }
+
+/* 10.4 Test feature & ghost buttons in dark */
+html[data-theme="dark"] .btn-ghost { background: rgba(255,255,255,0.04); color: var(--primary-200); box-shadow: inset 0 0 0 1.5px rgba(160,132,232,0.32); }
+html[data-theme="dark"] .btn-ghost:hover { background: rgba(255,255,255,0.08); color: #fff; box-shadow: inset 0 0 0 1.5px rgba(160,132,232,0.5); }
+
+/* 10.5 Eyebrow underline + nav link hover stay visible */
+html[data-theme="dark"] .head-block.center .eyebrow::after { opacity: 0.9; }
+html[data-theme="dark"] .nav-link { color: var(--fg-secondary); }
+html[data-theme="dark"] .nav-link:hover { color: var(--primary-200); }
+
+/* 10.6 micro.css top-edge accent bars + glow rings tuned for dark */
+html[data-theme="dark"] .comm-card:hover, html[data-theme="dark"] .test-card:hover, html[data-theme="dark"] .stat-card:hover {
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(160,132,232,0.30);
+  border-color: rgba(160,132,232,0.34);
+}
+
+/* =========================================================================
+   11. (scenes pin on desktop, unpin <=1000px via siya.css base rules)
+   ========================================================================= */
+
+/* 10.7 CINEMATIC SCENES — dark-theme legibility (Transformation / How / Experience)
+   Principle: product screenshots render as crisp LIGHT panels framed on the dark
+   page; the surrounding narrative UI gets a true dark treatment. */
+
+/* (a) Make the How section's steps light up step-by-step like Transformation
+   does — in BOTH themes — so it reads cinematic, not uniformly dim. */
+.how2[data-step="0"] .xf-steps li[data-s="0"],
+.how2[data-step="1"] .xf-steps li[data-s="1"],
+.how2[data-step="2"] .xf-steps li[data-s="2"] {
+  opacity: 1; background: #fff; border-color: var(--primary-200);
+  box-shadow: var(--shadow-md); transform: translateX(6px);
+}
+
+/* (b) The transform report card is a product screenshot → dark UI in dark mode
+   (scale tokens are re-mapped above, shared with .device). */
+html[data-theme="dark"] .xf-paper {
+  box-shadow: 0 42px 104px -38px rgba(0,0,0,0.85), 0 0 0 1px rgba(160,132,232,0.20);
+}
+
+/* (c) Narrative steps belong to the dark page: active = elevated dark card
+   (never white), light text, lavender ring. Covers Transformation + How. */
+html[data-theme="dark"] .xf-steps li b { color: var(--fg); }
+html[data-theme="dark"] .xf-steps li span { color: var(--fg-muted); }
+html[data-theme="dark"] .xf[data-step="0"] .xf-steps li[data-s="0"],
+html[data-theme="dark"] .xf[data-step="1"] .xf-steps li[data-s="1"],
+html[data-theme="dark"] .xf[data-step="2"] .xf-steps li[data-s="2"],
+html[data-theme="dark"] .how2[data-step="0"] .xf-steps li[data-s="0"],
+html[data-theme="dark"] .how2[data-step="1"] .xf-steps li[data-s="1"],
+html[data-theme="dark"] .how2[data-step="2"] .xf-steps li[data-s="2"] {
+  background: rgba(160,132,232,0.13);
+  border-color: rgba(160,132,232,0.34);
+  box-shadow: 0 12px 32px -14px rgba(0,0,0,0.65), 0 0 0 1px rgba(160,132,232,0.18);
+}
+
+/* (d) The teal (parent) chatline — mint in light, teal-tinted dark in dark.
+   Replaces the old inline light tokens so it never washes out. */
+.chatline.teal { background: var(--secondary-50); border-left-color: var(--secondary-400); }
+html[data-theme="dark"] .chatline.teal {
+  background: rgba(44,211,192,0.13); border-left-color: var(--secondary-400); color: var(--fg-secondary);
+}
+
+/* =========================================================================
+   12. CINEMATIC RESTORE — worksheet scan + Bloom's pyramid (scroll-scrubbed)
+   ========================================================================= */
+
+/* 12.1 Why-Siya worksheet: a soft scan sweep each time the card rises in */
+.dev-scanner { position: relative; }
+.dev-scan {
+  position: absolute; left: 0; right: 0; top: 0; height: 42%;
+  z-index: 4; pointer-events: none; opacity: 0;
+  background: linear-gradient(180deg, rgba(160,132,232,0) 0%, rgba(160,132,232,0.16) 68%, rgba(160,132,232,0.40) 100%);
+  border-bottom: 2px solid var(--primary-500);
+  box-shadow: 0 8px 26px 0 rgba(160,132,232,0.40);
+}
+.dev-scanner.in .dev-scan { animation: devScan 2.2s var(--ease-in-out) 0.4s 1 both; }
+@keyframes devScan {
+  0%   { opacity: 0; transform: translateY(-100%); }
+  14%  { opacity: 1; }
+  86%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(245%); }
+}
+
+/* 12.2 Bloom's pyramid — reveals bottom→top, scrubbed by #framework's --p */
+.bloom-grid { align-items: center; }
+.bloom-side { display: flex; flex-direction: column; gap: 18px; }
+.bloom-pyramid { position: relative; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.pyr {
+  position: relative; width: var(--w); min-height: 58px; box-sizing: border-box;
+  border-radius: 12px; padding: 0 18px;
+  display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 12px;
+  background: color-mix(in oklab, var(--c) 18%, transparent);
+  border: 1px solid color-mix(in oklab, var(--c) 40%, transparent);
+  opacity: clamp(0, calc((var(--p, 1) - var(--start)) / 0.12), 1);
+  transform: translateY(calc((1 - clamp(0, calc((var(--p, 1) - var(--start)) / 0.12), 1)) * 22px));
+  transition: box-shadow .35s var(--ease-out);
+}
+.pyr-tag { font: 800 13px/1 var(--font-ui); color: var(--c); letter-spacing: 0.02em; }
+.pyr-nm { font: 700 15px/1.15 var(--font-ui); color: #fff; min-width: 0; }
+.pyr-nm small { display: block; font-weight: 500; font-size: 10.5px; color: rgba(255,255,255,0.55); margin-top: 3px; letter-spacing: 0.02em; }
+.pyr-pct { font: 800 18px/1 var(--font-ui); color: var(--c); }
+/* the scan line rises through the pyramid as you scroll the scene */
+.bloom-scan {
+  position: absolute; left: -3%; right: -3%; height: 2px; border-radius: 2px; z-index: 5;
+  bottom: calc(clamp(0, var(--p, 0), 1) * 100%);
+  background: linear-gradient(90deg, transparent, var(--primary-300), var(--secondary-300), transparent);
+  box-shadow: 0 0 20px 4px rgba(160,132,232,0.5);
+  opacity: clamp(0, calc(var(--p, 0) * 6), 1);
+}
+.bloom-axis { display: flex; justify-content: space-between; gap: 12px; font: 600 11.5px/1.3 var(--font-ui); color: rgba(255,255,255,0.5); letter-spacing: 0.02em; padding: 0 2px; }
+.bloom-axis .ba-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--primary-300); vertical-align: middle; margin: 0 6px; }
+.bloom-axis .ba-dot.teal { background: var(--secondary-300); }
+.bloom-axis .ba-high { color: rgba(255,255,255,0.78); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pyr { opacity: 1 !important; transform: none !important; }
+  .bloom-scan { display: none; }
+  .dev-scanner.in .dev-scan { animation: none; }
+}
+@media (max-width: 1000px) {
+  .bloom-side { margin-top: 10px; }
+}
+
+/* 12.3 Final CTA — glow halo + floating proof chip around the mascot */
+.cta-stage { position: relative; display: grid; place-items: center; min-height: 320px; }
+.cta-halo {
+  position: absolute; inset: 0; margin: auto; width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(160,132,232,0.40) 0%, rgba(44,211,192,0.12) 45%, transparent 68%);
+  filter: blur(6px); z-index: 0;
+  animation: ctaPulse 5.5s var(--ease-in-out) infinite;
+}
+@keyframes ctaPulse { 0%, 100% { transform: scale(0.9); opacity: 0.7; } 50% { transform: scale(1.08); opacity: 1; } }
+.cta-stage .cta-mascot { position: relative; z-index: 2; }
+.cta-chip {
+  position: absolute; z-index: 3; left: 4%; bottom: 10%;
+  display: flex; align-items: center; gap: 11px;
+  background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.20);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg); padding: 11px 15px; box-shadow: var(--shadow-lg);
+  animation: float 7s var(--ease-in-out) infinite;
+}
+.cta-chip .ic { width: 38px; height: 38px; border-radius: 11px; flex: none; display: grid; place-items: center; background: rgba(160,132,232,0.32); color: #fff; }
+.cta-chip .ic .i { width: 20px; height: 20px; }
+.cta-chip .k { display: block; font: 800 18px/1 var(--font-ui); color: #fff; }
+.cta-chip .l { display: block; font: 600 11px/1 var(--font-ui); color: rgba(255,255,255,0.66); margin-top: 4px; letter-spacing: 0.02em; }
+@media (prefers-reduced-motion: reduce) { .cta-halo, .cta-chip { animation: none; } }
+@media (max-width: 1000px) { .cta-stage { min-height: 220px; margin-top: 4px; } }
+
+/* 12.4 Final CTA — flatter, landscape proportions (was a tall block) */
+.cta.sec { padding-block: clamp(48px, 6vw, 88px) !important; }
+.cta-card.cta-landscape {
+  padding: clamp(36px, 4vw, 56px) clamp(36px, 5vw, 76px);
+  border-radius: var(--radius-2xl);
+}
+.cta-landscape .cta-grid { grid-template-columns: 1.35fr 0.65fr; gap: clamp(28px, 4vw, 60px); }
+.cta-landscape .t-lg { font-size: clamp(28px, 3.4vw, 44px); max-width: 18ch; }
+.cta-landscape .lead { margin-top: 14px; max-width: 52ch; }
+.cta-landscape .cta-stage { min-height: 0; }
+.cta-landscape .cta-mascot { width: min(78%, 208px); }
+.cta-landscape .cta-halo { width: 248px; height: 248px; }
+
+/* points as a clean horizontal row, no wrapping mid-item */
+.cta-list.cta-row { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 22px; }
+.cta-list.cta-row li { white-space: nowrap; font-size: 15px; }
+
+@media (max-width: 1000px) {
+  .cta-landscape .cta-grid { grid-template-columns: 1fr; }
+  .cta-landscape .cta-stage { order: -1; }
+  .cta-list.cta-row { justify-content: flex-start; }
+}
+
+/* =========================================================================
+   13. EXPERIENCE — 3D rotating prism ("dice") driven by scroll
+   The five steps live on the faces of a vertical drum. As #experience scrolls
+   (data-step 0→4 from the engine) the drum rotates so the active step turns to
+   the FRONT — sharp + opaque — while the other faces tilt away, blurred and
+   transparent, like rolling a many-sided die to a new face.
+   ========================================================================= */
+.exp-grid { align-items: center; }
+.exp-aside { position: static; top: auto; }
+
+/* progress rail in the aside */
+.exp-rail { display: flex; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+.exp-dot {
+  width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
+  background: var(--primary-50); color: var(--primary-400);
+  font: 800 14px/1 var(--font-display); letter-spacing: 0.03em;
+  transition: background .5s var(--ease-out), color .5s var(--ease-out),
+              transform .45s var(--ease-spring), box-shadow .5s var(--ease-out);
+}
+.exp-dot b { font-weight: 800; }
+html[data-theme="dark"] .exp-dot { background: rgba(160,132,232,0.12); color: var(--primary-300); }
+.exp[data-step="0"] .exp-dot[data-s="0"],
+.exp[data-step="1"] .exp-dot[data-s="1"],
+.exp[data-step="2"] .exp-dot[data-s="2"],
+.exp[data-step="3"] .exp-dot[data-s="3"],
+.exp[data-step="4"] .exp-dot[data-s="4"] {
+  background: var(--gradient-lavender-soft); color: var(--primary-800);
+  transform: translateY(-3px) scale(1.06); box-shadow: var(--shadow-md);
+}
+html[data-theme="dark"] .exp[data-step="0"] .exp-dot[data-s="0"],
+html[data-theme="dark"] .exp[data-step="1"] .exp-dot[data-s="1"],
+html[data-theme="dark"] .exp[data-step="2"] .exp-dot[data-s="2"],
+html[data-theme="dark"] .exp[data-step="3"] .exp-dot[data-s="3"],
+html[data-theme="dark"] .exp[data-step="4"] .exp-dot[data-s="4"] { color: #fff; }
+
+/* the 3D stage */
+.exp-stage { position: relative; perspective: 1500px; height: 430px; }
+.exp-drum {
+  position: absolute; inset: 0; margin: auto; width: 100%; max-width: 540px; height: 360px;
+  transform-style: preserve-3d;
+  transition: transform 0.85s var(--ease-spring);
+}
+.exp[data-step="0"] .exp-drum { transform: rotateX(0deg); }
+.exp[data-step="1"] .exp-drum { transform: rotateX(-72deg); }
+.exp[data-step="2"] .exp-drum { transform: rotateX(-144deg); }
+.exp[data-step="3"] .exp-drum { transform: rotateX(-216deg); }
+.exp[data-step="4"] .exp-drum { transform: rotateX(-288deg); }
+
+.exp-stage .exp-face {
+  position: absolute; inset: 0; box-sizing: border-box; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center; gap: 9px;
+  padding: 34px 38px; border-radius: var(--radius-2xl);
+  background: var(--surface); border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-xl);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  opacity: 0; filter: none;
+  transition: opacity .7s var(--ease-out), box-shadow .7s var(--ease-out);
+}
+.exp-stage .exp-face[data-s="0"] { transform: rotateX(0deg)   translateZ(252px); }
+.exp-stage .exp-face[data-s="1"] { transform: rotateX(72deg)  translateZ(252px); }
+.exp-stage .exp-face[data-s="2"] { transform: rotateX(144deg) translateZ(252px); }
+.exp-stage .exp-face[data-s="3"] { transform: rotateX(216deg) translateZ(252px); }
+.exp-stage .exp-face[data-s="4"] { transform: rotateX(288deg) translateZ(252px); }
+html[data-theme="dark"] .exp-stage .exp-face { box-shadow: 0 40px 90px -36px rgba(0,0,0,0.8), 0 0 0 1px rgba(160,132,232,0.14); }
+
+/* the active face turns to the front: sharp + opaque */
+.exp[data-step="0"] .exp-face[data-s="0"],
+.exp[data-step="1"] .exp-face[data-s="1"],
+.exp[data-step="2"] .exp-face[data-s="2"],
+.exp[data-step="3"] .exp-face[data-s="3"],
+.exp[data-step="4"] .exp-face[data-s="4"] {
+  opacity: 1; filter: none;
+  box-shadow: var(--shadow-xl), 0 0 0 1px var(--primary-100);
+}
+html[data-theme="dark"] .exp[data-step="0"] .exp-face[data-s="0"],
+html[data-theme="dark"] .exp[data-step="1"] .exp-face[data-s="1"],
+html[data-theme="dark"] .exp[data-step="2"] .exp-face[data-s="2"],
+html[data-theme="dark"] .exp[data-step="3"] .exp-face[data-s="3"],
+html[data-theme="dark"] .exp[data-step="4"] .exp-face[data-s="4"] {
+  box-shadow: 0 44px 100px -38px rgba(0,0,0,0.85), 0 0 0 1px rgba(160,132,232,0.30);
+}
+
+.exp-fnum { font: 800 15px/1 var(--font-display); letter-spacing: 0.04em; color: var(--primary-600); display: inline-flex; align-items: center; gap: 10px; }
+.exp-fnum.teal { color: var(--secondary-600); }
+.exp-fnum::before { content: ""; width: 28px; height: 2px; border-radius: 2px; background: currentColor; opacity: .5; }
+.exp-face h3 { font-family: var(--font-ui); font-weight: 700; font-size: 22px; line-height: 1.2; margin: 0; color: var(--fg); }
+.exp-face p { font-size: 15px; color: var(--fg-muted); line-height: 1.55; margin: 0; }
+.exp-face .chatline { margin-top: 4px; }
+
+@media (prefers-reduced-motion: reduce) { .exp-drum { transition: none; } }
+
+/* mobile / no-3D fallback: a clean flat vertical list of cards */
+@media (max-width: 1000px) {
+  #experience { height: auto !important; }
+  .exp .pin { position: static; height: auto; min-height: 0; display: block; padding-block: clamp(48px, 8vw, 80px); }
+  .exp-stage { perspective: none; height: auto; }
+  .exp-drum { position: static; transform: none !important; max-width: none; height: auto; transform-style: flat; }
+  .exp-stage .exp-face {
+    position: relative; inset: auto; transform: none !important;
+    opacity: 1 !important; filter: none !important; backface-visibility: visible;
+    box-shadow: var(--shadow-md);
+  }
+  .exp-stage .exp-face + .exp-face { margin-top: 16px; }
+}
+
+/* =========================================================================
+   14. MOBILE — product / report / upload UI screens stay readable & uncramped
+   ========================================================================= */
+@media (max-width: 820px) {
+  .rep { padding: 20px; gap: 14px; }
+  .rep-cols { grid-template-columns: 1fr !important; }
+  .rep-head { flex-wrap: wrap; }
+  .device-bar { padding: 12px 14px; }
+  .device-bar .title { font-size: 12px; }
+}
+@media (max-width: 560px) {
+  .rep-stat .n { font-size: 19px; }
+  .rep-stat .t { font-size: 10px; }
+  .rep-siya-box { flex-direction: column; }
+}

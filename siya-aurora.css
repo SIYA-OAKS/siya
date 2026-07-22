@@ -1,0 +1,442 @@
+/* ============================================================================
+   SIYA — Aurora + Glass layer (loaded LAST, wins the cascade)
+   Brings the design-system "glass + aurora v2" surface (see Siya Login) into
+   the marketing site for the product-screen showcases, the For-Whom cards,
+   the experience "dice", and the testimonials fold.
+
+   Selectors are prefixed `html[data-theme]` where they must beat the dark-mode
+   .device / .aud-card overrides in siya-redesign.css (same specificity, later
+   source order ⇒ this file wins in BOTH themes). Product screens are rendered
+   LIGHT in both themes — they read as framed, glossy screenshots of the app.
+   ========================================================================== */
+
+:root {
+  --aurora-1: rgba(160, 132, 232, 0.30);   /* lavender */
+  --aurora-2: rgba(44,  211, 192, 0.18);   /* teal     */
+  --aurora-3: rgba(247, 217, 238, 0.52);   /* pink     */
+  --aurora-4: rgba(250, 220, 168, 0.40);   /* champagne*/
+  --glass-surface:        linear-gradient(150deg, rgba(255,255,255,0.80) 0%, rgba(255,255,255,0.56) 100%);
+  --glass-surface-strong: linear-gradient(150deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.74) 100%);
+  --glass-tint-lav:       linear-gradient(150deg, rgba(232,224,251,0.82) 0%, rgba(255,255,255,0.50) 100%);
+  --glass-tint-teal:      linear-gradient(150deg, rgba(210,247,242,0.82) 0%, rgba(255,255,255,0.50) 100%);
+  --glass-stroke:         rgba(95, 60, 168, 0.12);
+  --glass-stroke-strong:  rgba(95, 60, 168, 0.20);
+  --glass-edge:           rgba(255,255,255,0.62);
+  --ink:           #1A1B1E;
+  --ink-secondary: #2E2F36;
+  --ink-muted:     #4D4F58;
+  --ink-subtle:    #6A6C76;
+  --brand-strong:  #5B3DB7;
+  --brand:         #7050D5;
+  --brand-soft:    #A084E8;
+  --shadow-glass:  0 36px 80px -42px rgba(75,44,135,0.42), 0 2px 8px -4px rgba(75,44,135,0.18);
+}
+
+/* =========================================================================
+   1. AURORA SECTION CANVAS
+   A soft, multi-stop pastel field touching all three accents. Replaces the
+   flat .bg-soft on the showcase sections so glass panels have something to
+   refract.
+   ========================================================================= */
+.aurora-sec { background: #F4EEFA !important; position: relative; isolation: isolate; }
+.aurora-sec::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(58% 52% at 10% 4%,  var(--aurora-1) 0%, transparent 60%),
+    radial-gradient(40% 42% at 93% 8%,  var(--aurora-2) 0%, transparent 64%),
+    radial-gradient(52% 58% at 88% 96%, var(--aurora-3) 0%, transparent 66%),
+    radial-gradient(46% 52% at 4%  96%, var(--aurora-4) 0%, transparent 66%);
+  filter: blur(8px) saturate(1.05);
+}
+.aurora-sec > .wrap { position: relative; z-index: 1; }
+.aurora-sec > .orb { display: none; }   /* the aurora field replaces stray orbs */
+
+html[data-theme="dark"] .aurora-sec { background: #14121b !important; }
+html[data-theme="dark"] .aurora-sec::before {
+  background:
+    radial-gradient(58% 52% at 10% 4%,  rgba(160,132,232,0.26) 0%, transparent 60%),
+    radial-gradient(40% 42% at 93% 8%,  rgba(44,211,192,0.16) 0%, transparent 64%),
+    radial-gradient(52% 58% at 88% 96%, rgba(247,217,238,0.12) 0%, transparent 66%),
+    radial-gradient(46% 52% at 4%  96%, rgba(250,220,168,0.10) 0%, transparent 66%);
+}
+
+/* =========================================================================
+   2. GLASS PRODUCT SCREEN — applied to a .device frame
+   We remap the brand SCALE tokens to translucent glass tints so every
+   token-driven inner tile (rep-stat, subj-head, gap-action, bars …) becomes
+   frosted automatically. Forced light in both themes.
+   ========================================================================= */
+html[data-theme] .aurora-screen {
+  --surface:        rgba(255,255,255,0.72);
+  --fg:             var(--ink);
+  --fg-secondary:   var(--ink-secondary);
+  --fg-muted:       var(--ink-muted);
+  --fg-subtle:      var(--ink-subtle);
+  --border-soft:    var(--glass-stroke);
+  --border:         var(--glass-stroke-strong);
+  --primary-50:     rgba(160,132,232,0.12);
+  --primary-100:    rgba(160,132,232,0.20);
+  --primary-200:    rgba(160,132,232,0.34);
+  --primary-300:    rgba(160,132,232,0.55);
+  --primary-400:    #9A7BE6;
+  --primary-500:    #7E5FDD;
+  --primary-600:    var(--brand);
+  --primary-700:    var(--brand-strong);
+  --primary-800:    #46299A;
+  --primary-900:    #371f7d;
+  --secondary-50:   rgba(44,211,192,0.14);
+  --secondary-100:  rgba(44,211,192,0.22);
+  --secondary-200:  rgba(44,211,192,0.34);
+  --secondary-300:  rgba(44,211,192,0.55);
+  --secondary-600:  #0FA08F;
+  --secondary-700:  #0C857A;
+  --secondary-900:  #075c54;
+  --gray-200:       rgba(95,60,168,0.12);
+  --gray-300:       rgba(95,60,168,0.22);
+
+  background: var(--glass-surface-strong) !important;
+  border: 1px solid var(--glass-edge) !important;
+  box-shadow: var(--shadow-glass), inset 0 1px 0 rgba(255,255,255,0.6) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.15);
+  backdrop-filter: blur(22px) saturate(1.15);
+}
+/* frosted title bar */
+html[data-theme] .aurora-screen .device-bar {
+  background: var(--glass-tint-lav);
+  border-bottom: 1px solid var(--glass-stroke);
+}
+html[data-theme] .aurora-screen .pill-live {
+  background: rgba(255,255,255,0.5); border: 1px solid var(--glass-stroke);
+}
+/* tiles, subjects, info boxes: translucent so the aurora glows through */
+html[data-theme] .aurora-screen .rep-stat,
+html[data-theme] .aurora-screen .subj,
+html[data-theme] .aurora-screen .subj-head,
+html[data-theme] .aurora-screen .ud-right,
+html[data-theme] .aurora-screen .ud-drop {
+  background: var(--glass-surface);
+  border-color: var(--glass-stroke);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+html[data-theme] .aurora-screen .subj-head { background: var(--glass-tint-lav); }
+html[data-theme] .aurora-screen .gap-action { background: var(--glass-tint-teal); border: 1px solid var(--glass-stroke); }
+/* hardcoded-#fff inner tiles in upload + report → glass */
+html[data-theme] .aurora-screen .ud-file,
+html[data-theme] .aurora-screen .ud-insight {
+  background: var(--glass-surface) !important;
+  border: 1px solid var(--glass-stroke) !important;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+html[data-theme] .aurora-screen .ud-drop .ic { background: rgba(255,255,255,0.7) !important; box-shadow: var(--shadow-glass-soft); }
+html[data-theme] .aurora-screen .rep-siya-box {
+  background: var(--glass-tint-teal) !important;
+  border: 1px solid var(--glass-stroke) !important;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+/* the "3-week plan" inline box (inline primary-50 bg) reads via tokens already;
+   reinforce its stroke + frost */
+html[data-theme] .aurora-screen .rep > div[style*="primary-50"] {
+  background: var(--glass-tint-lav) !important;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+/* gap rows / answer rows keep a clean glass divider */
+html[data-theme] .aurora-screen .gap-row { border-top-color: var(--glass-stroke); }
+/* keep data bars vivid (the 70/20/10 brand signal) on frosted tracks */
+html[data-theme] .aurora-screen .bar { background: rgba(95,60,168,0.12); }
+html[data-theme] .aurora-screen .bar > i { background: linear-gradient(90deg, #7E5FDD, #A084E8); }
+html[data-theme] .aurora-screen .bar > i.teal { background: linear-gradient(90deg, #16B7A6, #45D8C8); }
+/* worksheet "analysed view" inner answer cards (inline border-soft) */
+html[data-theme] .aurora-screen [style*="border:1px solid var(--border-soft)"] {
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+/* avatar initials chip */
+html[data-theme] .aurora-screen .quote-av { background: var(--glass-tint-lav); color: var(--brand-strong); }
+/* the worksheet-scan sweep reads better tinted on glass */
+html[data-theme] .aurora-screen.dev-scanner .dev-scan {
+  background: linear-gradient(180deg, rgba(160,132,232,0) 0%, rgba(160,132,232,0.14) 68%, rgba(160,132,232,0.34) 100%);
+}
+
+/* a soft glow pad directly under a glass screen so it reads as floating glass */
+.aurora-screen { position: relative; }
+.aurora-glasspad { position: relative; }
+.aurora-glasspad::before {
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  inset: -6% -4% -10% -4%;
+  background:
+    radial-gradient(50% 60% at 22% 10%, var(--aurora-1) 0%, transparent 62%),
+    radial-gradient(46% 56% at 84% 88%, var(--aurora-2) 0%, transparent 64%);
+  filter: blur(34px); opacity: 0.9;
+}
+.aurora-glasspad > * { position: relative; z-index: 1; }
+
+/* =========================================================================
+   3. FOR WHOM — glass cards on the aurora field
+   ========================================================================= */
+html[data-theme] #whom .aud-card {
+  background: var(--glass-surface-strong) !important;
+  border: 1px solid var(--glass-edge) !important;
+  box-shadow: var(--shadow-glass) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.1);
+  backdrop-filter: blur(20px) saturate(1.1);
+}
+html[data-theme] #whom .aud-card { --fg: var(--ink); --fg-muted: var(--ink-muted); --fg-secondary: var(--ink-secondary); }
+html[data-theme] #whom .aud-card h3 { color: var(--ink); }
+html[data-theme] #whom .aud-mini .m {
+  background: var(--glass-tint-lav) !important; border: 1px solid var(--glass-stroke);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+html[data-theme] #whom .aud-mini .m.teal { background: var(--glass-tint-teal) !important; }
+html[data-theme] #whom .aud-mini .m .v { color: var(--brand-strong) !important; }
+html[data-theme] #whom .aud-mini .m.teal .v { color: var(--secondary-700) !important; }
+html[data-theme] #whom .aud-mini .m .k { color: var(--ink-muted) !important; }
+html[data-theme] #whom .aud-list li { color: var(--ink-secondary) !important; }
+html[data-theme] #whom .aud-list .ck { color: var(--secondary-700); }
+html[data-theme] #whom .aud-card:hover {
+  transform: translateY(-7px);
+  box-shadow: var(--shadow-glass), 0 0 0 1px var(--glass-stroke-strong) !important;
+  border-color: var(--brand-soft) !important;
+}
+/* a faint top sheen line for the glossy glass edge */
+html[data-theme] #whom .aud-card::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(150deg, rgba(255,255,255,0.55), transparent 38%);
+  mix-blend-mode: screen; opacity: 0.7;
+}
+#whom .aud-card { position: relative; overflow: hidden; }
+
+/* =========================================================================
+   4. THE EXPERIENCE — glass "dice" with visible isometric facets
+   The drum keeps the scroll-driven rotateX roll, but we tilt it on Y so the
+   faces rolling to the TOP and BOTTOM read as glass facets of a die. Non-active
+   facets stay crisp glass outlines (barely blurred) instead of a foggy blur.
+   ========================================================================= */
+#experience.exp { background: #F1EBFA !important; }
+#experience.exp::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(50% 52% at 14% 6%,  var(--aurora-1) 0%, transparent 60%),
+    radial-gradient(42% 46% at 90% 14%, var(--aurora-2) 0%, transparent 64%),
+    radial-gradient(52% 56% at 86% 94%, var(--aurora-3) 0%, transparent 66%);
+  filter: blur(10px) saturate(1.05);
+}
+html[data-theme="dark"] #experience.exp { background: #14121b !important; }
+html[data-theme="dark"] #experience.exp::before {
+  background:
+    radial-gradient(50% 52% at 14% 6%,  rgba(160,132,232,0.24) 0%, transparent 60%),
+    radial-gradient(42% 46% at 90% 14%, rgba(44,211,192,0.14) 0%, transparent 64%);
+}
+#experience .pin { z-index: 1; }
+
+/* deeper stage + isometric tilt */
+.exp-stage { perspective: 1700px; perspective-origin: 50% 50%; height: 460px; }
+.exp .exp-drum {
+  transform-style: preserve-3d;
+  transition: transform 1.05s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+/* vertical roll — same glass-dice facets, no isometric Y tilt */
+.exp[data-step="0"] .exp-drum { transform: rotateX(0deg); }
+.exp[data-step="1"] .exp-drum { transform: rotateX(-72deg); }
+.exp[data-step="2"] .exp-drum { transform: rotateX(-144deg); }
+.exp[data-step="3"] .exp-drum { transform: rotateX(-216deg); }
+.exp[data-step="4"] .exp-drum { transform: rotateX(-288deg); }
+
+/* the facets: clear glass outlines */
+html[data-theme] .exp-stage .exp-face {
+  --fg: var(--ink); --fg-muted: var(--ink-muted);
+  background: linear-gradient(150deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.12) 100%);
+  border: 1.5px solid rgba(255,255,255,0.55);
+  box-shadow: 0 30px 60px -36px rgba(75,44,135,0.5), inset 0 1px 0 rgba(255,255,255,0.6);
+  -webkit-backdrop-filter: blur(6px) saturate(1.1);
+  backdrop-filter: blur(6px) saturate(1.1);
+  opacity: 0.42;
+  filter: none;                          /* clear, not foggy */
+  transition: opacity .8s var(--ease-out), box-shadow .8s var(--ease-out),
+              background .8s var(--ease-out), border-color .8s var(--ease-out);
+}
+html[data-theme="dark"] .exp-stage .exp-face {
+  background: linear-gradient(150deg, rgba(160,132,232,0.16) 0%, rgba(44,211,192,0.06) 100%);
+  border-color: rgba(160,132,232,0.34);
+  --fg: #F3F1F8; --fg-muted: #C9C5D4;
+}
+/* the active facet faces front: solid, readable glass + brand ring */
+html[data-theme] .exp[data-step="0"] .exp-face[data-s="0"],
+html[data-theme] .exp[data-step="1"] .exp-face[data-s="1"],
+html[data-theme] .exp[data-step="2"] .exp-face[data-s="2"],
+html[data-theme] .exp[data-step="3"] .exp-face[data-s="3"],
+html[data-theme] .exp[data-step="4"] .exp-face[data-s="4"] {
+  opacity: 1;
+  background: var(--glass-surface-strong);
+  border-color: var(--glass-edge);
+  box-shadow: var(--shadow-glass), 0 0 0 1.5px rgba(160,132,232,0.40), inset 0 1px 0 rgba(255,255,255,0.7);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  backdrop-filter: blur(24px) saturate(1.2);
+}
+html[data-theme="dark"] .exp[data-step="0"] .exp-face[data-s="0"],
+html[data-theme="dark"] .exp[data-step="1"] .exp-face[data-s="1"],
+html[data-theme="dark"] .exp[data-step="2"] .exp-face[data-s="2"],
+html[data-theme="dark"] .exp[data-step="3"] .exp-face[data-s="3"],
+html[data-theme="dark"] .exp[data-step="4"] .exp-face[data-s="4"] {
+  background: linear-gradient(150deg, rgba(40,33,64,0.92) 0%, rgba(28,28,34,0.86) 100%);
+  border-color: rgba(160,132,232,0.4);
+}
+html[data-theme] .exp-face .chatline {
+  background: var(--glass-tint-lav); border-left: 3px solid var(--brand-soft); color: var(--ink-secondary);
+}
+html[data-theme] .exp-face .chatline.teal { background: var(--glass-tint-teal); border-left-color: var(--secondary-600); }
+html[data-theme="dark"] .exp-face .chatline { background: rgba(160,132,232,0.14); color: #C9C5D4; }
+html[data-theme="dark"] .exp-face .chatline.teal { background: rgba(44,211,192,0.14); }
+
+/* the rail numbers are now clickable to roll the die */
+.exp-rail .exp-dot { cursor: pointer; user-select: none; position: relative; }
+.exp-rail .exp-dot:hover { transform: translateY(-3px) scale(1.08); box-shadow: var(--shadow-md); }
+.exp-rail .exp-dot:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(160,132,232,0.30); }
+.exp-rail .exp-dot::after {
+  content: ""; position: absolute; inset: auto auto -7px 50%; transform: translateX(-50%);
+  width: 0; height: 2px; border-radius: 2px; background: var(--brand);
+  transition: width .3s var(--ease-out);
+}
+.exp[data-step="0"] .exp-dot[data-s="0"]::after,
+.exp[data-step="1"] .exp-dot[data-s="1"]::after,
+.exp[data-step="2"] .exp-dot[data-s="2"]::after,
+.exp[data-step="3"] .exp-dot[data-s="3"]::after,
+.exp[data-step="4"] .exp-dot[data-s="4"]::after { width: 60%; }
+/* hint label */
+.exp-roll-hint {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 16px;
+  font: 600 12px/1 var(--font-ui); letter-spacing: 0.02em; color: var(--brand-strong);
+}
+.exp-roll-hint .dice-ic { width: 15px; height: 15px; }
+html[data-theme="dark"] .exp-roll-hint { color: var(--primary-300); }
+
+@media (prefers-reduced-motion: reduce) {
+  .exp .exp-drum { transition: none; }
+}
+/* mobile: faces become flat glass cards (drum unpins via siya-redesign) */
+@media (max-width: 1000px) {
+  html[data-theme] .exp-stage .exp-face {
+    opacity: 1 !important; background: var(--glass-surface-strong);
+    border: 1px solid var(--glass-edge);
+    box-shadow: var(--shadow-glass);
+  }
+  .exp-stage { perspective: none; }
+}
+
+/* =========================================================================
+   5. TESTIMONIALS / RESULTS FOLD — engaging glass treatment
+   ========================================================================= */
+html[data-theme] #results .stat-card {
+  background: var(--glass-surface-strong) !important;
+  border: 1px solid var(--glass-edge) !important;
+  box-shadow: var(--shadow-glass) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.1); backdrop-filter: blur(18px) saturate(1.1);
+}
+html[data-theme] #results .stat-card .n { color: var(--brand-strong); }
+html[data-theme] #results .stat-card.teal .n { color: var(--secondary-700); }
+html[data-theme] #results .stat-card .l { color: var(--ink-muted); }
+.stat-card .n.n-word { font-size: clamp(26px, 2.6vw, 34px); }
+
+/* qualitative (non-numeric) tiles where a school count used to be */
+.band-num.band-word { font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.01em; }
+
+/* testimonial cards → glass with a big quotation glyph */
+html[data-theme] #results .test-card:not(.test-feature) {
+  position: relative; overflow: hidden;
+  background: var(--glass-surface-strong) !important;
+  border: 1px solid var(--glass-edge) !important;
+  box-shadow: var(--shadow-glass) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.1); backdrop-filter: blur(18px) saturate(1.1);
+}
+html[data-theme] #results .test-card { --fg: var(--ink); --fg-muted: var(--ink-muted); --fg-secondary: var(--ink-secondary); }
+html[data-theme] #results .test-card:not(.test-feature) .q { color: var(--ink-secondary); position: relative; z-index: 1; }
+html[data-theme] #results .test-card .who { color: var(--ink); }
+html[data-theme] #results .test-card .role { color: var(--ink-muted); }
+#results .test-card:not(.test-feature)::after {
+  content: "\201C"; position: absolute; top: 6px; right: 18px; z-index: 0;
+  font-family: var(--font-display); font-weight: 800; font-size: 120px; line-height: 1;
+  color: rgba(160,132,232,0.16); pointer-events: none;
+}
+html[data-theme] #results .test-card .test-av {
+  background: var(--glass-tint-lav); color: var(--brand-strong);
+  border: 1px solid var(--glass-stroke);
+}
+html[data-theme] #results .test-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-glass), 0 0 0 1px var(--brand-soft) !important;
+  border-color: var(--brand-soft) !important;
+}
+html[data-theme] #results .stars { color: var(--siya-orange); }
+
+/* the feature testimonial — richer aurora-tinted glass hero */
+html[data-theme] #results .test-feature {
+  position: relative; overflow: hidden;
+  background:
+    linear-gradient(150deg, rgba(255,255,255,0.34), rgba(255,255,255,0.10)),
+    linear-gradient(135deg, var(--aurora-1), var(--aurora-2)) !important;
+  border: 1px solid var(--glass-edge) !important;
+  box-shadow: var(--shadow-glass) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.15); backdrop-filter: blur(22px) saturate(1.15);
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 28px;
+}
+html[data-theme] #results .test-feature .q { color: #2A1C52; position: relative; z-index: 1; }
+html[data-theme="dark"] #results .test-feature .q { color: #ECE8FB; }
+html[data-theme] #results .test-feature .test-by { z-index: 1; }
+.test-feature .tf-mascot {
+  width: 130px; height: auto; flex: none; align-self: center;
+  filter: drop-shadow(0 18px 30px rgba(75,44,135,0.30));
+}
+.test-feature .tf-quote {
+  position: absolute; top: -18px; left: 22px; z-index: 0;
+  font-family: var(--font-display); font-weight: 800; font-size: 150px; line-height: 1;
+  color: rgba(255,255,255,0.34); pointer-events: none;
+}
+html[data-theme="dark"] #results .test-feature { background: linear-gradient(135deg, #2A2140, #1C1C22) !important; }
+html[data-theme="dark"] #results .test-feature .tf-quote { color: rgba(160,132,232,0.22); }
+@media (max-width: 760px) {
+  html[data-theme] #results .test-feature { grid-template-columns: 1fr; }
+  .test-feature .tf-mascot { width: 96px; justify-self: center; }
+}
+
+/* =========================================================================
+   6. DARK-MODE GLASS  — the glass tokens above are white-biased and were
+   applied in BOTH themes, so cards/screens read as glaring white panels on
+   the near-black canvas. Redefining the tokens for dark makes the entire
+   glass system (For-Whom, testimonials, experience facets, product screens)
+   cascade to a proper smoked-glass dark surface with light ink.
+   ========================================================================= */
+html[data-theme="dark"] {
+  --glass-surface:        linear-gradient(150deg, rgba(40,36,56,0.74) 0%, rgba(26,26,34,0.56) 100%);
+  --glass-surface-strong: linear-gradient(150deg, rgba(44,40,62,0.92) 0%, rgba(26,26,34,0.80) 100%);
+  --glass-tint-lav:       linear-gradient(150deg, rgba(160,132,232,0.20) 0%, rgba(160,132,232,0.06) 100%);
+  --glass-tint-teal:      linear-gradient(150deg, rgba(44,211,192,0.18) 0%, rgba(44,211,192,0.05) 100%);
+  --glass-stroke:         rgba(160,132,232,0.18);
+  --glass-stroke-strong:  rgba(160,132,232,0.32);
+  --glass-edge:           rgba(160,132,232,0.22);
+  --ink:           #F3F1F8;
+  --ink-secondary: #D8D4E4;
+  --ink-muted:     #A8A4B8;
+  --ink-subtle:    #8A8698;
+  --brand-strong:  #C9B6F5;
+  --brand:         #BBA8F1;
+  --brand-soft:    #A084E8;
+  --shadow-glass:  0 40px 90px -44px rgba(0,0,0,0.78), 0 2px 10px -4px rgba(0,0,0,0.55);
+}
+
+/* product screens: the light-glass remap hardcodes white inner fills — flip
+   the few raw-white tokens/tiles so the framed app screen reads as the real
+   Siya dark UI (matches the product's own dark theme). */
+html[data-theme="dark"] .aurora-screen {
+  --surface:     rgba(255,255,255,0.045);
+  --primary-400: #B49BF0;
+  --primary-500: #A687EC;
+  --primary-800: #C9B6F5;
+  --primary-900: #DACDF8;
+  --secondary-600: #2CD3C0;
+  --secondary-700: #5FE0D2;
+  --secondary-900: #9FECE3;
+  box-shadow: 0 46px 112px -42px rgba(0,0,0,0.9), 0 0 0 1px rgba(160,132,232,0.18) !important;
+}
+html[data-theme="dark"] .aurora-screen .pill-live { background: rgba(160,132,232,0.14); }
+html[data-theme="dark"] .aurora-screen .ud-drop .ic { background: rgba(160,132,232,0.16) !important; box-shadow: none; }
+html[data-theme="dark"] .aurora-screen .bar { background: rgba(160,132,232,0.16); }
+html[data-theme="dark"] #whom .aud-card::after { background: linear-gradient(150deg, rgba(160,132,232,0.16), transparent 40%); }
+html[data-theme="dark"] #results .test-card:not(.test-feature)::after { color: rgba(160,132,232,0.14); }

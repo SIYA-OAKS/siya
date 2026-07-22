@@ -1,0 +1,197 @@
+/* ============================================================================
+   SIYA — micro-interaction layer
+   Small, tasteful, on-brand motion on every interactive surface. Loaded AFTER
+   siya.css so it wins cascade ties. Built on design-system easing/shadows
+   (warm --ease-out, 180–260ms, soft lavender-tinted shadows). Fully
+   reduced-motion safe (guards at the bottom). Does not touch the cinematic
+   scroll engine — purely additive component-level polish.
+   ========================================================================== */
+
+/* =========================================================================
+   1. BUTTONS — arrow slide, press feedback, focus glow
+   The markup uses <svg class="i"> for the trailing arrow (not .arr), so we
+   target the trailing icon directly.
+   ========================================================================= */
+.btn svg.i { transition: transform var(--dur-base) var(--ease-out); }
+.btn:hover svg.i:last-child { transform: translateX(5px); }
+.nav-cta:hover svg.i { transform: translateX(4px); }
+.btn:active { transition-duration: var(--dur-instant); }
+/* the check icons inside CTA lists shouldn't slide */
+.cta-list .ck, .aud-list .ck { transition: none; }
+
+/* =========================================================================
+   2. CARDS — unify hover into a soft lift + lavender glow + border tint.
+   reveal-card / aud-card already lift in siya.css; we extend the rest and
+   add a consistent glow ring so every card responds to the pointer.
+   ========================================================================= */
+.comm-card, .test-card, .stat-card, .flow-body, .insight-card, .device-rise {
+  transition: transform var(--dur-slow) var(--ease-out),
+              box-shadow var(--dur-slow) var(--ease-out),
+              border-color var(--dur-slow) var(--ease-out);
+}
+.comm-card:hover, .test-card:hover, .stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg), 0 0 0 1px var(--primary-100);
+  border-color: var(--primary-200);
+}
+.test-feature:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.reveal-card:hover { box-shadow: var(--shadow-lg), 0 0 0 1px var(--primary-100); border-color: var(--primary-200); }
+.aud-card:hover { box-shadow: var(--shadow-lg), 0 0 0 1px var(--primary-100); border-color: var(--primary-200); }
+
+/* a thin accent bar that wipes in along the top edge on hover */
+.reveal-card, .comm-card, .test-card:not(.test-feature), .flow-body {
+  position: relative; overflow: hidden;
+}
+.reveal-card::before, .comm-card::before, .test-card:not(.test-feature)::before, .flow-body::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--primary-500), var(--secondary-500));
+  transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.reveal-card:hover::before, .comm-card:hover::before, .test-card:not(.test-feature):hover::before, .flow-body:hover::before { transform: scaleX(1); }
+
+/* =========================================================================
+   3. ICONS — pop + tint flip when their card is hovered
+   ========================================================================= */
+.reveal-card .ic, .comm-card .ic {
+  transition: transform var(--dur-slow) var(--ease-spring),
+              background var(--dur-slow) var(--ease-out),
+              color var(--dur-slow) var(--ease-out);
+}
+.reveal-card:hover .ic, .comm-card:hover .ic {
+  transform: translateY(-2px) scale(1.08) rotate(-5deg);
+  background: var(--primary-500); color: #fff;
+}
+
+/* audience mascots gently lift + tilt on hover (mascot stays squishy/alive) */
+.aud-card .aud-mascot { transition: transform var(--dur-slow) var(--ease-spring), filter var(--dur-slow) var(--ease-out); }
+.aud-card:hover .aud-mascot { transform: translateY(-7px) scale(1.07) rotate(2.5deg); filter: drop-shadow(0 18px 26px rgba(75,44,135,0.26)); }
+
+/* mini stat tiles inside audience cards */
+.aud-mini .m, .rep-stat { transition: transform var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out); }
+.aud-card:hover .aud-mini .m { transform: translateY(-2px); }
+.rep-stat:hover { transform: translateY(-2px); background: var(--primary-100); }
+
+/* testimonial avatar spin-pop */
+.test-card .test-av, .quote-av { transition: transform var(--dur-slow) var(--ease-spring); }
+.test-card:hover .test-av { transform: scale(1.1) rotate(-4deg); }
+
+/* =========================================================================
+   4. TAGS & PILLS — slight scale so they feel tactile
+   ========================================================================= */
+.tag { transition: transform var(--dur-fast) var(--ease-out); }
+.gap-row:hover .tag, .xf-a:hover .tag { transform: scale(1.06); }
+
+/* =========================================================================
+   5. REPORT INTERNALS — rows highlight under the pointer
+   ========================================================================= */
+.gap-row { transition: background var(--dur-base) var(--ease-out); border-radius: var(--radius-sm); }
+.gap-row:hover { background: var(--primary-50); }
+.ic-row { transition: background var(--dur-base) var(--ease-out); }
+.ic-row:hover { background: var(--primary-50); }
+.ud-file { transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+.ud-file:hover { transform: translateX(3px); box-shadow: var(--shadow-sm); }
+
+/* =========================================================================
+   6. BLOOM ROWS — hover lift in the dark scene
+   ========================================================================= */
+.bloom-row { transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out); }
+.bloom-row:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); transform: translateX(4px); }
+
+/* =========================================================================
+   7. DATA VIZ — a soft light sweep travels along filled bars (life, not noise)
+   Applied only once a bar has been filled (it carries inline width from JS).
+   ========================================================================= */
+.bar > i, .bloom-track > i:not(.scrub) { position: relative; overflow: hidden; }
+.bar > i::after, .bloom-track > i:not(.scrub)::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: barSheen 3.4s var(--ease-in-out) infinite;
+  animation-delay: 1.1s;
+}
+@keyframes barSheen { 0% { transform: translateX(-100%); } 55%, 100% { transform: translateX(220%); } }
+
+/* =========================================================================
+   8. GRADIENT WORD — slow living shimmer across the highlighted word
+   ========================================================================= */
+.grad-word {
+  background: linear-gradient(100deg, var(--primary-600) 0%, var(--secondary-600) 35%, var(--primary-500) 60%, var(--primary-700) 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: gradWord 7s var(--ease-in-out) infinite;
+}
+.dark .grad-word, .grad-word[style*="primary-300"] {
+  background: linear-gradient(100deg, var(--primary-300) 0%, var(--secondary-300) 40%, var(--primary-200) 70%, var(--primary-300) 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+@keyframes gradWord { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+/* =========================================================================
+   9. HERO CHIPS — float continuously (existing) + react to hover
+   ========================================================================= */
+.chip { transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); cursor: default; }
+.chip:hover { transform: translateY(-4px) scale(1.04); box-shadow: var(--shadow-xl); }
+.hero-note-item .dot { animation: dotPulse 2.6s var(--ease-in-out) infinite; }
+.hero-note-item:nth-child(2) .dot { animation-delay: 0.5s; }
+.hero-note-item:nth-child(3) .dot { animation-delay: 1s; }
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 4px var(--secondary-100); }
+  50% { box-shadow: 0 0 0 6px rgba(44,211,192,0.10); }
+}
+
+/* =========================================================================
+   10. FOOTER + TEXT LINKS — nudge on hover
+   ========================================================================= */
+.foot-col a { transition: color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.foot-col a:hover { transform: translateX(4px); }
+
+/* =========================================================================
+   11. POINTER-REACTIVE GLOW — follows the cursor on the dark CTA card.
+   JS sets --mx / --my (0–100%). Subtle, behind the content.
+   ========================================================================= */
+.cta-card { position: relative; }
+.cta-card::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 30%) var(--my, 20%), rgba(160,132,232,0.22), transparent 60%);
+  opacity: 0; transition: opacity var(--dur-slow) var(--ease-out);
+}
+.cta-card.glow::after { opacity: 1; }
+
+/* =========================================================================
+   12. SCROLL-CUE — fade the whole cue out once the page has been scrolled
+   (handled by JS toggling .scrolled on body); plus arrow-on-band hover
+   ========================================================================= */
+.band-item { transition: transform var(--dur-base) var(--ease-out); }
+.band-item:hover { transform: translateY(-3px); }
+.band-num .u { display: inline-block; transition: transform var(--dur-base) var(--ease-spring); }
+.band-item:hover .band-num .u { transform: scale(1.18); }
+
+/* =========================================================================
+   13. STAGGERED ENTRANCE for rows that currently appear all at once.
+   Failsafe by design: the base state is VISIBLE. micro.js adds .mi-on to a
+   container when it scrolls into view, which plays an additive entrance
+   animation on its tagged children (each carrying an inline --mid delay).
+   If reveal never fires, content simply stays visible.
+   ========================================================================= */
+.mi { will-change: transform, opacity; opacity: 0; transform: translateY(20px) scale(0.985); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+.mi-on .mi {
+  opacity: 1; transform: none;
+  transition-delay: var(--mid, 0s);
+}
+
+/* =========================================================================
+   REDUCED MOTION — disable continuous/decorative loops, keep states usable
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .bar > i::after, .bloom-track > i:not(.scrub)::after { animation: none; display: none; }
+  .grad-word { animation: none; }
+  .hero-note-item .dot { animation: none; }
+  .mi-on .mi { transition: none !important; }
+  .mi { opacity: 1 !important; transform: none !important; }
+  .cta-card::after { display: none; }
+}

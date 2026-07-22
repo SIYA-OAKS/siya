@@ -1,0 +1,79 @@
+/* ============================================================================
+   SIYA — Contact page. Reuses the site tokens; adds only the form layout.
+   ========================================================================== */
+
+.contact-sec { padding-top: clamp(130px, 14vw, 170px); padding-bottom: clamp(72px, 9vw, 120px); position: relative; overflow: hidden; }
+.contact-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(36px, 5vw, 72px); align-items: start; }
+
+.contact-intro .lead { max-width: 44ch; }
+
+/* what happens next — three quiet steps */
+.next-steps { list-style: none; padding: 0; margin: 34px 0 0; display: grid; gap: 18px; counter-reset: step; }
+.next-steps li { display: flex; gap: 16px; align-items: flex-start; }
+.next-steps .n {
+  counter-increment: step; flex: none; width: 40px; height: 40px; border-radius: 12px;
+  display: grid; place-items: center; font: 700 15px/1 var(--font-ui);
+  background: var(--primary-100); color: var(--primary-700);
+}
+.next-steps .n::before { content: counter(step, decimal-leading-zero); }
+.next-steps b { display: block; font: 700 16px/1.3 var(--font-ui); color: var(--fg); margin-bottom: 4px; }
+.next-steps span { font-size: 14.5px; color: var(--fg-muted); line-height: 1.55; }
+
+.contact-trust {
+  display: inline-flex; align-items: center; gap: 9px; margin-top: 30px;
+  font: 500 13.5px/1.45 var(--font-ui); color: var(--fg-muted);
+}
+.contact-trust .i { color: var(--secondary-600); flex: none; width: 15px; height: 15px; }
+
+.contact-mascot { width: 104px; margin-top: 30px; filter: drop-shadow(0 16px 24px rgba(75,44,135,0.18)); }
+
+/* ── the form card ── */
+.form-card {
+  background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl); padding: clamp(28px, 3.4vw, 44px);
+  position: relative;
+}
+html[data-theme="dark"] .form-card { box-shadow: 0 40px 90px -40px rgba(0,0,0,0.7); }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; }
+.f-field { display: grid; gap: 7px; }
+.f-field.wide { grid-column: 1 / -1; }
+.f-field label { font: 600 13.5px/1.2 var(--font-ui); color: var(--fg-secondary); }
+.f-field label .req { color: var(--primary-600); }
+.f-field input, .f-field select, .f-field textarea {
+  width: 100%; box-sizing: border-box; font: 500 15px/1.45 var(--font-ui); color: var(--fg);
+  background: var(--bg); border: 1px solid var(--gray-300); border-radius: var(--radius-md);
+  padding: 12px 14px; outline: none; appearance: none;
+  transition: border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+}
+html[data-theme="dark"] .f-field input, html[data-theme="dark"] .f-field select, html[data-theme="dark"] .f-field textarea {
+  background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.14); color: #fff;
+}
+.f-field input::placeholder, .f-field textarea::placeholder { color: var(--fg-muted); opacity: 0.65; }
+.f-field input:focus, .f-field select:focus, .f-field textarea:focus {
+  border-color: var(--primary-500); box-shadow: 0 0 0 4px rgba(160, 132, 232, 0.18);
+}
+.f-field textarea { min-height: 120px; resize: vertical; }
+.f-select { position: relative; }
+.f-select::after {
+  content: ""; position: absolute; right: 15px; top: 50%; width: 8px; height: 8px;
+  border-right: 2px solid var(--fg-muted); border-bottom: 2px solid var(--fg-muted);
+  transform: translateY(-70%) rotate(45deg); pointer-events: none; border-radius: 1px;
+}
+
+.form-actions { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 6px; }
+.form-note { font: 500 13px/1.45 var(--font-ui); color: var(--fg-muted); max-width: 30ch; }
+
+/* success state */
+.form-success { display: none; text-align: center; padding: clamp(28px, 4vw, 48px) 12px; }
+.form-success img { width: 96px; margin-bottom: 18px; filter: drop-shadow(0 14px 22px rgba(75,44,135,0.2)); }
+.form-success h3 { font-family: var(--font-ui); font-weight: 800; font-size: 24px; margin: 0 0 10px; color: var(--fg); }
+.form-success p { font-size: 15.5px; color: var(--fg-muted); line-height: 1.6; margin: 0 auto; max-width: 42ch; }
+.form-card.sent form { display: none; }
+.form-card.sent .form-success { display: block; }
+
+@media (max-width: 960px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .contact-mascot { display: none; }
+}

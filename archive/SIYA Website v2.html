@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+  (function(){try{var t=localStorage.getItem('siya-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();
+  </script>
+
+  <title>Siya. Every page. Every insight. | AI worksheet intelligence for schools</title>
+  <meta name="description" content="Siya reads every worksheet, test and answer sheet, maps each response to a cognitive level, and hands teachers, principals and parents clear, actionable insight in seconds. Already trusted by schools across India.">
+  <meta name="keywords" content="Siya, AI for schools, worksheet analysis, competency based assessment, Bloom's taxonomy, NEP 2020, edtech India, student learning gaps, formative assessment, school analytics">
+  <link rel="canonical" href="https://heysiya.ai/">
+  <meta name="theme-color" content="#A084E8">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Siya">
+  <meta property="og:title" content="Siya. Every page. Every insight.">
+  <meta property="og:description" content="Siya turns every worksheet into actionable cognitive insight for teachers, principals and parents, automatically.">
+  <meta property="og:url" content="https://heysiya.ai/">
+  <meta property="og:image" content="https://heysiya.ai/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@heysiya">
+  <meta name="twitter:title" content="Siya. Every page. Every insight.">
+  <meta name="twitter:description" content="Siya turns every worksheet into actionable cognitive insight, automatically.">
+
+  <link rel="apple-touch-icon" href="assets/siya-logo-lavender.png">
+  <link rel="icon" type="image/png" href="assets/siya-logo-lavender.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap">
+
+  <link rel="stylesheet" href="_ds/siya-design-system-d7fa7edd-b49c-4821-81ba-08b62ed22e87/colors_and_type.css">
+  <link rel="stylesheet" href="siya.css">
+  <link rel="stylesheet" href="siya-micro.css">
+  <link rel="stylesheet" href="siya-redesign.css">
+  <link rel="stylesheet" href="siya-scan-hero.css">
+  <link rel="stylesheet" href="siya-aurora.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Siya",
+    "url": "https://heysiya.ai/",
+    "logo": "https://heysiya.ai/assets/siya-logo-lavender.png",
+    "description": "Siya is an AI companion for schools that turns every worksheet into actionable cognitive insight for teachers, principals and parents.",
+    "sameAs": ["https://www.linkedin.com/company/heysiya"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Siya",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web",
+    "description": "AI that reads worksheets, maps every response to Bloom's cognitive levels, and delivers per-student, class and parent-ready insight automatically.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR", "description": "Complimentary school pilot" },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "16" }
+  }
+  </script>
+
+  <style>
+    .i { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+    .i-sm { width: 16px; height: 16px; }
+    .i-lg { width: 26px; height: 26px; }
+    .campaign .ln { display: block; overflow: hidden; padding-bottom: 0.04em; }
+    .campaign .ln > span { display: inline-block; }
+  </style>
+</head>
+<body id="top">
+
+<div id="progress" aria-hidden="true"></div>
+
+<!-- ===== Icon sprite ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="ic-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="ic-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></symbol>
+  <symbol id="ic-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></symbol>
+  <symbol id="ic-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="7" rx="1"/><rect x="12" y="6" width="3" height="11" rx="1"/><rect x="17" y="13" width="3" height="4" rx="1"/></symbol>
+  <symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="ic-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="ic-trend" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5 8.5 10.5 2 17"/><path d="M16 7h6v6"/></symbol>
+  <symbol id="ic-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></symbol>
+  <symbol id="ic-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="ic-school" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></symbol>
+  <symbol id="ic-bolt" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+  <symbol id="ic-heart" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.3 3-5.5A4.5 4.5 0 0 0 12 5 4.5 4.5 0 0 0 2 8.5c0 2.2 1.5 4 3 5.5l7 7z"/></symbol>
+  <symbol id="ic-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></symbol>
+  <symbol id="ic-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="ic-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="ic-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></symbol>
+  <symbol id="ic-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></symbol>
+  <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="ic-filter" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54z"/></symbol>
+</svg>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" aria-label="Siya home"><img class="nav-logo" src="assets/siya-logo-lavender.png" alt="Siya"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="nav-link" href="#how">How it works</a>
+      <a class="nav-link" href="#whom">For whom</a>
+      <a class="nav-link" href="#results">Results</a>
+      <a class="nav-link" href="#testimonials">Testimonials</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-primary nav-cta" href="#contact">Schedule a walkthrough <svg class="i i-sm" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
+        <svg class="i themo-sun" aria-hidden="true"><use href="#ic-sun"/></svg>
+        <svg class="i themo-moon" aria-hidden="true"><use href="#ic-moon"/></svg>
+      </button>
+      <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== HERO: Siya converts rough sheets into insight ===== -->
+<section class="hero hero-center hero-split" id="hero" data-chapter="The problem">
+  <div class="hero-bg" aria-hidden="true"></div>
+
+  <div class="wrap hero-stack">
+   <div class="hero-copy">
+    <p class="hero-kicker tl" style="--tld:0.1s"><span class="spark" aria-hidden="true">✦</span> AI worksheet intelligence · Trusted by schools across India</p>
+    <h1 class="campaign t-hero">
+      <span class="ln"><span class="tl" style="--tld:0.18s">Schools sit on a</span></span>
+      <span class="ln"><span class="tl" style="--tld:0.28s"><span class="grad-word">goldmine of data.</span></span></span>
+    </h1>
+    <p class="hero-strike tl" style="--tld:0.42s">Every term, that insight gets <span class="strike-word">thrown away</span>.</p>
+    <p class="lead tl" style="--tld:0.52s">Siya turns every worksheet, test and answer sheet into actionable cognitive insight, so nothing a student tells you ever gets lost.</p>
+    <div class="hero-cta tl" style="--tld:0.62s">
+      <a class="btn btn-primary btn-lg" href="#contact">Schedule a walkthrough <svg class="i" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
+      <a class="btn btn-ghost btn-lg" href="#how">See how Siya works</a>
+    </div>
+    <div class="hero-note tl" style="--tld:0.72s">
+      <span class="hero-note-item"><span class="dot"></span>Complimentary pilot</span>
+      <span class="hero-note-item"><span class="dot"></span>Live in one week</span>
+      <span class="hero-note-item"><span class="dot"></span>Any worksheet format</span>
+    </div>
+   </div>
+
+    <div class="hero-scene scan-scene" data-hs="0.05" aria-hidden="true">
+      <div class="scan-frame">
+        <span class="scan-glow g1"></span>
+        <span class="scan-glow g2"></span>
+        <span class="scan-glow g3"></span>
+
+        <div class="scan-stage">
+
+          <!-- ===================== WORKSHEET ===================== -->
+          <div class="ss-worksheet">
+            <div class="ss-paper">
+              <span class="ss-rule"></span>
+              <span class="ss-margin"></span>
+
+              <div class="ss-content">
+                <div class="ss-ws-head">
+                  <span class="ss-ws-subj">MATHEMATICS</span>
+                  <span class="ss-ws-no">Worksheet 12</span>
+                </div>
+                <div class="ss-ws-name">
+                  <span style="flex-shrink:0">Name:</span>
+                  <span class="ss-hand-name">Arjun M.</span>
+                  <span style="margin-left:auto;flex-shrink:0">Class 6-B</span>
+                </div>
+
+                <!-- Q1 -->
+                <div class="ss-q">1. Find the area of the triangle.</div>
+                <div style="display:flex;align-items:center;gap:20px;margin-bottom:16px">
+                  <svg width="124" height="82" viewBox="0 0 124 82" fill="none" style="overflow:visible">
+                    <path d="M14 70 L96 68 L42 12 Z" stroke="#2F4FA0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                    <path d="M42 12 L42 69" stroke="#7C8AB5" stroke-width="1.6" stroke-dasharray="3 4" stroke-linecap="round"></path>
+                    <rect x="42" y="59" width="9" height="9" stroke="#7C8AB5" stroke-width="1.2" fill="none"></rect>
+                    <text x="46" y="82" font-family="Caveat, cursive" font-size="18" font-weight="700" fill="#2F4FA0">8 cm</text>
+                    <text x="-2" y="40" font-family="Caveat, cursive" font-size="18" font-weight="700" fill="#2F4FA0">5 cm</text>
+                  </svg>
+                  <div class="ss-hand" style="font-size:27px;line-height:1.25">
+                    ½ × 8 × 5<br>= <span style="color:#2F4FA0">20 cm²</span>
+                    <span class="ss-tick" style="transform:translateY(2px)">✓</span>
+                  </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="ss-q">2. Solve&nbsp;&nbsp;3x + 7 = 22</div>
+                <div class="ss-hand" style="font-size:27px;line-height:1.3;margin-bottom:14px">
+                  <span style="position:relative;color:#A79BB6">3x = 14<span style="position:absolute;left:-2px;right:-2px;top:52%;height:2px;background:#C9779A;transform:rotate(-4deg)"></span></span>&nbsp;&nbsp;
+                  3x = 15&nbsp;&nbsp;<span style="color:#2F4FA0">x = 5</span>
+                  <span class="ss-tick">✓</span>
+                </div>
+
+                <!-- Q3 -->
+                <div class="ss-q">3. Perimeter of a square, side 6 cm.</div>
+                <div class="ss-hand" style="font-size:27px;line-height:1.25">
+                  4 × 6 = <span style="color:#2F4FA0">24 cm</span>
+                  <span class="ss-tick">✓</span>
+                </div>
+              </div>
+
+              <span class="ss-beam"></span>
+            </div>
+          </div>
+
+          <!-- essence particles: raw marks → insight -->
+          <span class="ss-particle p1"></span>
+          <span class="ss-particle p2"></span>
+          <span class="ss-particle p3"></span>
+
+          <!-- ===================== INSIGHT CARD ===================== -->
+          <div class="ss-insight">
+            <div class="ss-insight-card">
+              <span class="ss-insight-bar"></span>
+              <div class="ss-insight-eyebrow">
+                <span class="spk">✦</span>
+                <span class="lbl">Siya noticed</span>
+              </div>
+              <div class="ss-insight-text">Arjun sketches before he solves — he works through new concepts visually.</div>
+            </div>
+          </div>
+
+          <!-- ===================== TREND MINI-CARD ===================== -->
+          <div class="ss-trend">
+            <div class="ss-trend-card">
+              <div class="ss-trend-head">
+                <span class="t">Effort · last 3 weeks</span>
+                <span class="b">Climbing</span>
+              </div>
+              <svg class="ss-trend-svg" viewBox="0 0 260 50" preserveAspectRatio="none" fill="none" style="overflow:visible">
+                <polyline class="ss-trend-line" points="4,44 54,37 104,40 154,24 204,17 256,6" fill="none" stroke="#2CD3C0" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                <circle class="ss-trend-dot" cx="256" cy="6" r="5.5" fill="#2CD3C0"></circle>
+              </svg>
+            </div>
+          </div>
+
+          <!-- ===================== FLOATING TAGS ===================== -->
+          <div class="ss-tag t1"><span class="chip"><span class="dot"></span>Visual learner</span></div>
+          <div class="ss-tag t2"><span class="chip"><span class="dot"></span>Geometry · confident</span></div>
+          <div class="ss-tag t3"><span class="chip"><span class="dot"></span>Effort ↑</span></div>
+
+          <!-- ===================== MASCOT ===================== -->
+          <div class="ss-mascot">
+            <div class="ss-mascot-inner">
+              <span class="ss-mascot-ground"></span>
+              <img class="ss-mascot-img ss-mascot-think" src="assets/siya-thinking.png" alt="">
+              <img class="ss-mascot-img ss-mascot-happy" src="assets/siya-happy.png" alt="">
+              <span class="ss-spark s1">✦</span>
+              <span class="ss-spark s2">✦</span>
+              <span class="ss-spark s3">✦</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cue" aria-hidden="true"><span>Scroll</span><span class="mouse"></span></div>
+</section>
+
+<!-- ===== TRUST BAND ===== -->
+<section class="band sec-tight" aria-label="Proven outcomes">
+  <div class="wrap band-grid">
+    <div class="band-item r"><div class="band-num band-word">Across India</div><div class="band-lbl">schools already using Siya</div></div>
+    <div class="band-item r r-d1"><div class="band-num"><span data-count="11">0</span><span class="u"> hrs</span></div><div class="band-lbl">saved / teacher / week</div></div>
+    <div class="band-item r r-d2"><div class="band-num"><span data-count="73">0</span><span class="u">%</span></div><div class="band-lbl">show measurable improvement</div></div>
+    <div class="band-item r r-d3"><div class="band-num"><span data-count="8470">0</span><span class="u">+</span></div><div class="band-lbl">worksheets processed daily</div></div>
+  </div>
+</section>
+
+<!-- ===== SIGNATURE PINNED SCENE: worksheet → insight ===== -->
+<section class="scene xf" id="transform" data-chapter="The transformation" data-scene data-steps="3" style="height:260vh">
+  <div class="pin">
+    <div class="wrap xf-grid">
+      <div class="xf-narrative">
+        <p class="eyebrow">The transformation</p>
+        <h2 class="campaign t-lg">From worksheet to <span class="grad-word">parent insight.</span></h2>
+        <ol class="xf-steps">
+          <li data-s="0"><b>The worksheet</b><span>Thirty answers. One score: 22 / 30. "Good job." The thinking behind each answer? Gone.</span></li>
+          <li data-s="1"><b>Siya reads every response</b><span>Each answer mapped to how the student was thinking: recall, application, transfer.</span></li>
+          <li data-s="2"><b>Insight, delivered</b><span>Out comes a plan: exactly where understanding breaks, and what to practise tonight.</span></li>
+        </ol>
+      </div>
+      <div class="xf-visual">
+        <div class="xf-paper">
+          <div class="xf-ph">
+            <span class="av"><svg class="i" aria-hidden="true"><use href="#ic-doc"/></svg></span>
+            <div><div style="font-family:var(--font-ui);font-weight:700;font-size:15px">Arjun Rao · Grade 6B</div><div style="font-size:12.5px;color:var(--fg-muted)">Newton's Laws of Motion · Science</div></div>
+          </div>
+          <div class="xf-ans">
+            <div class="xf-a"><span class="q">What is Newton's First Law of Motion?</span><span class="bch tag tag-info">Recall ✓</span></div>
+            <div class="xf-a"><span class="q">Why does a passenger jerk forward when a car brakes?</span><span class="bch tag tag-mod">Apply ◑</span></div>
+            <div class="xf-a gap"><span class="q">Design an experiment to demonstrate inertia.</span><span class="bch tag tag-crit">Transfer ✗</span></div>
+          </div>
+          <div class="xf-stamp" aria-hidden="true">22/30</div>
+          <div class="xf-scan" aria-hidden="true"></div>
+        </div>
+        <div class="xf-insight">
+          <div class="h"><svg class="i i-sm" aria-hidden="true" style="color:var(--primary-600)"><use href="#ic-spark"/></svg> Siya insight · Week 12</div>
+          <p>Arjun recalls definitions accurately but can't yet transfer concepts to new situations (Bloom's L2 → L4). <b style="color:var(--secondary-700)">Tonight:</b> ask him to design an inertia demo from scratch, no notes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCT SHOWCASE: KRUTHIKA REPORT ===== -->
+<section class="sec aurora-sec" id="product" data-chapter="Live report">
+  <div class="orb orb-lav" data-depth="0.05" style="width:300px;height:300px;top:0;right:-60px;opacity:.3"></div>
+  <div class="wrap">
+    <div class="head-block center r">
+      <p class="eyebrow" style="justify-content:center">See Siya in action</p>
+      <h2 class="campaign t-lg">One worksheet stack. One clear plan for every child.</h2>
+      <p class="lead">This is a real weekly report Siya builds automatically. Every gap pinpointed, every fix scoped to tonight's homework.</p>
+    </div>
+
+    <div class="device device-rise aurora-screen r" style="margin-top:48px;max-width:1080px;margin-inline:auto">
+      <div class="device-bar">
+        <span class="dots"><i style="background:#FFB3BA"></i><i style="background:var(--siya-champagne)"></i><i style="background:var(--secondary-300)"></i></span>
+        <span class="title"><svg class="i i-sm" aria-hidden="true" style="color:var(--primary-600)"><use href="#ic-spark"/></svg> Siya · AI Insights</span>
+        <span class="pill-live"><span class="dot"></span>Weekly Report</span>
+      </div>
+      <div class="rep">
+        <div class="rep-head">
+          <div>
+            <h3 class="ui" style="font-size:22px">Kruthika's Weekly Report</h3>
+            <p style="font-size:13.5px;color:var(--fg-muted);margin-top:4px">Grade 10 · Maths &amp; Science · Term 2, 2025</p>
+          </div>
+          <span class="tag tag-ok"><svg class="i i-sm" aria-hidden="true"><use href="#ic-trend"/></svg> On the rise</span>
+        </div>
+        <div class="rep-stat-row">
+          <div class="rep-stat"><div class="n">18</div><div class="t">Sheets read</div></div>
+          <div class="rep-stat"><div class="n t-crit">5</div><div class="t">Gaps found</div></div>
+          <div class="rep-stat"><div class="n t-warn">2</div><div class="t">Act now</div></div>
+          <div class="rep-stat teal"><div class="n">+24%</div><div class="t">Projected jump</div></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="rep-cols">
+          <div class="subj">
+            <div class="subj-head">
+              <div><div class="nm">Mathematics</div><div class="meta">3 gaps · 10 worksheets</div></div>
+              <div class="score t-crit">54%</div>
+            </div>
+            <div class="gap-row">
+              <div class="gap-top"><span class="tag tag-crit">Critical</span><span class="gap-name">Trig identity transformation</span><span class="gap-score">6/10</span></div>
+              <p class="gap-desc">Treats each identity as a separate memorised fact, so it can't derive one from another.</p>
+              <div class="gap-action"><svg class="i i-sm" aria-hidden="true" style="color:var(--secondary-600)"><use href="#ic-bolt"/></svg><span><b>Tonight:</b> ask her to derive sec²θ = 1 + tan²θ from scratch, no notes.</span></div>
+            </div>
+            <div class="gap-row">
+              <div class="gap-top"><span class="tag tag-con">Concept</span><span class="gap-name">Chain vs. product rule</span><span class="gap-score">4/10</span></div>
+              <p class="gap-desc">Sees sin(x²) as two separate parts instead of one nested function.</p>
+              <div class="gap-action"><svg class="i i-sm" aria-hidden="true" style="color:var(--secondary-600)"><use href="#ic-bolt"/></svg><span><b>Tonight:</b> before solving, write "outer = ___, inner = ___".</span></div>
+            </div>
+          </div>
+          <div class="subj">
+            <div class="subj-head">
+              <div><div class="nm">Science</div><div class="meta">2 gaps · 8 worksheets</div></div>
+              <div class="score t-warn">61%</div>
+            </div>
+            <div class="gap-row">
+              <div class="gap-top"><span class="tag tag-crit">Critical</span><span class="gap-name">KVL sign convention</span><span class="gap-score">5/8</span></div>
+              <p class="gap-desc">Handles KCL (nodes) perfectly but reverses direction in KVL (loops).</p>
+              <div class="gap-action"><svg class="i i-sm" aria-hidden="true" style="color:var(--secondary-600)"><use href="#ic-bolt"/></svg><span><b>Tonight:</b> draw a clockwise arrow on every loop before writing the equation.</span></div>
+            </div>
+            <div class="gap-row">
+              <div class="gap-top"><span class="tag tag-con">Concept</span><span class="gap-name">Le Chatelier's principle</span><span class="gap-score">3/8</span></div>
+              <p class="gap-desc">Definition memorised ✓ · physical intuition missing ✗.</p>
+              <div class="gap-action"><svg class="i i-sm" aria-hidden="true" style="color:var(--secondary-600)"><use href="#ic-bolt"/></svg><span><b>Tonight:</b> use the "pressure relief valve" analogy: the system always reduces stress.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--primary-50);border:1px solid var(--border-soft);border-radius:var(--radius-lg);padding:18px 20px">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+            <div style="font-family:var(--font-ui);font-weight:700;font-size:15px;color:var(--fg)">Where Kruthika could be in 3 weeks</div>
+            <span class="tag tag-info">3-week fix plan</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-family:var(--font-ui);font-weight:600;font-size:13px;margin-bottom:7px"><span>Mathematics</span><span style="color:var(--secondary-700)">54% → 78% <b>(+24)</b></span></div>
+              <div class="bar"><i data-bar="78"></i></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-family:var(--font-ui);font-weight:600;font-size:13px;margin-bottom:7px"><span>Science</span><span style="color:var(--secondary-700)">61% → 84% <b>(+23)</b></span></div>
+              <div class="bar"><i class="teal" data-bar="84"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rep-siya-box">
+          <img src="assets/siya-thinking.png" alt="" aria-hidden="true" style="width:52px;height:52px;object-fit:contain;flex:none">
+          <div>
+            <div style="font-family:var(--font-ui);font-weight:700;font-size:15px;color:var(--fg)">Consistent errors are fixable errors.</div>
+            <p style="font-size:14px;color:var(--fg-muted);line-height:1.55;margin-top:5px">Kruthika doesn't have a knowledge problem. She has a pattern problem. Fix the patterns, and the scores follow. <span style="color:var(--secondary-700);font-weight:600">Siya · Week 12</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUESTION PAPER BUILDER (product surface) ===== -->
+<section class="sec aurora-sec" id="papers" data-chapter="Question papers">
+  <div class="wrap">
+    <div class="head-block center r">
+      <p class="eyebrow" style="justify-content:center">Inside the workspace</p>
+      <h2 class="campaign t-lg">Set the exam. Siya drafts, collects and evaluates.</h2>
+      <p class="lead">Generate a full sectioned question paper, or upload one you already have. Either way, Siya gathers submissions and marks every script for you.</p>
+    </div>
+
+    <div class="device device-rise aurora-screen qp-screen r" style="margin-top:48px;max-width:1080px;margin-inline:auto">
+      <div class="device-bar">
+        <span class="dots"><i style="background:#FFB3BA"></i><i style="background:var(--siya-champagne)"></i><i style="background:var(--secondary-300)"></i></span>
+        <span class="title"><svg class="i i-sm" aria-hidden="true" style="color:var(--primary-600)"><use href="#ic-doc"/></svg> Siya · Question Paper</span>
+        <span class="pill-live"><span class="dot"></span>Generate · Upload · Evaluate</span>
+      </div>
+
+      <div class="qp-body">
+        <!-- builder banner -->
+        <div class="qp-banner">
+          <div class="qp-banner-copy">
+            <p class="qp-overline"><span class="spk">✦</span> Siya question paper builder</p>
+            <h3 class="qp-title">Create a new question paper</h3>
+            <p class="qp-sub">Set the exam and let Siya draft a full sectioned paper — or upload one you already have. Either way, collect submissions and evaluate.</p>
+          </div>
+          <img class="qp-mascot" src="assets/siya-happy.png" alt="" aria-hidden="true">
+          <div class="qp-actions">
+            <button class="qp-btn qp-btn-primary" type="button"><svg class="i i-sm" aria-hidden="true"><use href="#ic-plus"/></svg> Create question paper</button>
+            <button class="qp-btn qp-btn-ghost" type="button"><svg class="i i-sm" aria-hidden="true"><use href="#ic-upload"/></svg> Upload paper</button>
+          </div>
+        </div>
+
+        <!-- recent papers -->
+        <div class="qp-recent-head">
+          <div>
+            <div class="qp-rh-title">Recent question papers</div>
+            <div class="qp-rh-sub">Pick up evaluation where you left off, or revisit a graded paper.</div>
+          </div>
+          <div class="qp-tools">
+            <span class="qp-search"><svg class="i i-sm" aria-hidden="true"><use href="#ic-search"/></svg> Search question papers</span>
+            <span class="qp-filter"><svg class="i i-sm" aria-hidden="true"><use href="#ic-filter"/></svg> Filter</span>
+          </div>
+        </div>
+
+        <div class="qp-grid">
+          <article class="qp-card">
+            <div class="qp-card-top">
+              <span class="qp-ico"><svg class="i i-sm" aria-hidden="true"><use href="#ic-doc"/></svg></span>
+              <div class="qp-meta"><div class="s">Mathematics</div><div class="m">Class X · Half-Yearly</div></div>
+              <span class="tag tag-ok"><svg class="i i-sm" aria-hidden="true"><use href="#ic-check"/></svg> Graded</span>
+            </div>
+            <div class="qp-name">Half-Yearly Examination</div>
+            <div class="qp-facts">38 questions · 78 marks · Jun 12, 2026</div>
+            <div class="qp-prog-row"><span>All 34 students evaluated</span><span>100%</span></div>
+            <div class="bar"><i class="teal" data-bar="100"></i></div>
+            <div class="qp-card-foot"><span class="qp-source"><svg class="i i-sm" aria-hidden="true" style="color:var(--primary-600)"><use href="#ic-spark"/></svg> Siya-made</span><a class="qp-link" href="#papers">View results <svg class="i i-sm" aria-hidden="true"><use href="#ic-arrow"/></svg></a></div>
+          </article>
+
+          <article class="qp-card qp-card-active">
+            <div class="qp-card-top">
+              <span class="qp-ico"><svg class="i i-sm" aria-hidden="true"><use href="#ic-doc"/></svg></span>
+              <div class="qp-meta"><div class="s">Mathematics</div><div class="m">Class X · Unit Test</div></div>
+              <span class="tag tag-mod"><svg class="i i-sm" aria-hidden="true"><use href="#ic-clock"/></svg> In progress</span>
+            </div>
+            <div class="qp-name">Unit Test — Real Numbers &amp; Polynomials</div>
+            <div class="qp-facts">22 questions · 40 marks · Jun 4, 2026</div>
+            <div class="qp-prog-row"><span>12 of 30 evaluated</span><span>40%</span></div>
+            <div class="bar"><i class="amber" data-bar="40"></i></div>
+            <div class="qp-card-foot"><span class="qp-source"><svg class="i i-sm" aria-hidden="true" style="color:var(--primary-600)"><use href="#ic-spark"/></svg> Siya-made</span><a class="qp-link qp-link-go" href="#papers">Continue evaluating <svg class="i i-sm" aria-hidden="true"><use href="#ic-arrow"/></svg></a></div>
+          </article>
+
+          <article class="qp-card">
+            <div class="qp-card-top">
+              <span class="qp-ico qp-ico-teal"><svg class="i i-sm" aria-hidden="true"><use href="#ic-doc"/></svg></span>
+              <div class="qp-meta"><div class="s">Science</div><div class="m">Class X · Unit Test</div></div>
+              <span class="tag tag-ok"><svg class="i i-sm" aria-hidden="true"><use href="#ic-check"/></svg> Graded</span>
+            </div>
+            <div class="qp-name">Periodic Test — Chemical Reactions</div>
+            <div class="qp-facts">22 questions · 50 marks · May 28, 2026</div>
+            <div class="qp-prog-row"><span>All 32 students evaluated</span><span>100%</span></div>
+            <div class="bar"><i class="teal" data-bar="100"></i></div>
+            <div class="qp-card-foot"><span class="qp-source"><svg class="i i-sm" aria-hidden="true"><use href="#ic-upload"/></svg> Uploaded</span><a class="qp-link" href="#papers">View results <svg class="i i-sm" aria-hidden="true"><use href="#ic-arrow"/></svg></a></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY SIYA MATTERS: worksheet analysis ===== -->
+<section class="sec aurora-sec" id="why" data-chapter="Why it matters">
+  <div class="wrap">
+    <div class="head-block center r">
+      <p class="eyebrow" style="justify-content:center">Why Siya matters</p>
+      <h2 class="campaign t-lg">A correct answer doesn't guarantee deep understanding.</h2>
+      <p class="lead">Every worksheet contains diagnostic data your school currently discards. Siya reveals not just marks, but exactly where student thinking breaks down.</p>
+    </div>
+
+    <div class="device device-rise dev-scanner aurora-screen r" style="margin-top:44px;max-width:880px;margin-inline:auto">
+      <span class="dev-scan" aria-hidden="true"></span>
+      <div class="device-bar">
+        <span class="dots"><i style="background:#FFB3BA"></i><i style="background:var(--siya-champagne)"></i><i style="background:var(--secondary-300)"></i></span>
+        <span class="title"><svg class="i i-sm" aria-hidden="true" style="color:var(--primary-600)"><use href="#ic-doc"/></svg> Science Worksheet · Grade 6B</span>
+        <span class="pill-live"><span class="dot"></span>Analysed</span>
+      </div>
+      <div style="padding:26px;display:grid;gap:16px">
+        <div style="display:flex;align-items:center;gap:13px">
+          <span class="quote-av" style="width:44px;height:44px;font-size:14px">AR</span>
+          <div><div style="font-family:var(--font-ui);font-weight:700;font-size:16px">Arjun Rao</div><div style="font-size:13px;color:var(--fg-muted)">Newton's Laws of Motion · Feb 14, 2025</div></div>
+        </div>
+        <div style="display:grid;gap:12px">
+          <div style="border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:15px 16px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:7px"><span class="tag tag-info">Define · Recall</span><span class="tag tag-ok"><svg class="i i-sm" aria-hidden="true"><use href="#ic-check"/></svg> Correct</span></div>
+            <p style="font-size:13.5px;color:var(--fg-secondary);font-weight:600">What is Newton's First Law of Motion?</p>
+            <p style="font-size:13.5px;color:var(--fg-muted);margin-top:4px;font-style:italic">"An object at rest stays at rest unless acted upon by a force."</p>
+          </div>
+          <div style="border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:15px 16px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:7px"><span class="tag tag-info">Apply · Real world</span><span class="tag tag-mod">◑ Partial</span></div>
+            <p style="font-size:13.5px;color:var(--fg-secondary);font-weight:600">Why does a passenger jerk forward when a car brakes suddenly?</p>
+            <p style="font-size:13.5px;color:var(--fg-muted);margin-top:4px;font-style:italic">"Because the car stops but the person doesn't stop at the same time."</p>
+          </div>
+          <div class="xf-gap-box">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:7px"><span class="tag tag-info">Reason · Transfer</span><span class="tag tag-crit">✗ Gap detected</span></div>
+            <p style="font-size:13.5px;color:var(--fg-secondary);font-weight:600">Design an experiment to demonstrate inertia.</p>
+            <p style="font-size:13.5px;color:var(--fg-muted);margin-top:4px;font-style:italic">"You can push something and see if it moves."</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:13px;align-items:flex-start;background:var(--primary-50);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:16px">
+          <img src="assets/siya-curious.png" alt="" aria-hidden="true" style="width:46px;height:46px;object-fit:contain;flex:none">
+          <p style="font-size:13.5px;color:var(--fg-secondary);line-height:1.55"><b style="font-family:var(--font-ui);color:var(--primary-800)">Siya insight:</b> Arjun recalls definitions accurately but cannot transfer concepts to unfamiliar scenarios. Gap identified at the Application-to-Analysis level (Bloom's L2 → L4).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal-grid r r-d1" style="margin-top:24px;max-width:880px;margin-inline:auto">
+      <div class="reveal-card" style="padding:22px"><h3 style="font-size:17px">Confirmed strength</h3><p>Solid recall, an anchor for differentiated instruction. Build on this.</p></div>
+      <div class="reveal-card" style="padding:22px"><h3 style="font-size:17px">Conceptual bridge missing</h3><p>Knows the event but hasn't grasped the mechanism. Bridge needed.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOOM PINNED SCENE ===== -->
+<section class="scene dark" id="framework" data-chapter="The framework" data-scene style="height:220vh">
+  <div class="orb orb-lav" data-depth="0.04" style="width:380px;height:380px;top:-120px;right:-80px;opacity:.18"></div>
+  <div class="pin">
+    <div class="wrap bloom-grid">
+      <div class="r">
+        <p class="eyebrow on-dark">The competency-based framework</p>
+        <h2 class="campaign t-lg">Most assessments test two levels. <span class="grad-word" style="color:var(--primary-300)">Siya measures all six.</span></h2>
+        <p class="lead">Bloom's Taxonomy defines six levels of cognitive complexity, from basic recall to original creation. Siya maps every response automatically, giving leadership a cognitive-depth profile across every class, subject and term.</p>
+        <div class="bloom-note">
+          <img src="assets/siya-graduate.png" alt="" aria-hidden="true" style="width:54px;height:54px;object-fit:contain;flex:none">
+          <p style="font-size:14.5px;color:rgba(255,255,255,0.82);line-height:1.55"><b style="color:#fff;font-family:var(--font-ui)">NEP 2020 mandates this shift.</b> Traditional tests measure what students remember. Competency frameworks measure what they can do: analyse, evaluate, create. Siya makes it measurable.</p>
+        </div>
+      </div>
+      <div class="bloom-side">
+        <div class="bloom-pyramid" aria-label="Bloom's taxonomy: share of responses reaching each cognitive level">
+          <span class="bloom-scan" aria-hidden="true"></span>
+          <div class="pyr" style="--w:46%;--start:0.55;--c:#F2A888"><span class="pyr-tag">L6</span><span class="pyr-nm">Create<small>Design · Construct</small></span><span class="pyr-pct">28%</span></div>
+          <div class="pyr" style="--w:56%;--start:0.44;--c:#F2A888"><span class="pyr-tag">L5</span><span class="pyr-nm">Evaluate<small>Judge · Critique</small></span><span class="pyr-pct">35%</span></div>
+          <div class="pyr" style="--w:67%;--start:0.33;--c:var(--siya-champagne)"><span class="pyr-tag">L4</span><span class="pyr-nm">Analyse<small>Compare · Infer</small></span><span class="pyr-pct">41%</span></div>
+          <div class="pyr" style="--w:78%;--start:0.22;--c:var(--secondary-400)"><span class="pyr-tag">L3</span><span class="pyr-nm">Apply<small>Use · Solve · Execute</small></span><span class="pyr-pct">52%</span></div>
+          <div class="pyr" style="--w:89%;--start:0.11;--c:var(--secondary-400)"><span class="pyr-tag">L2</span><span class="pyr-nm">Understand<small>Explain · Classify</small></span><span class="pyr-pct">71%</span></div>
+          <div class="pyr" style="--w:100%;--start:0.00;--c:var(--primary-300)"><span class="pyr-tag">L1</span><span class="pyr-nm">Remember<small>Recall · Recognise · List</small></span><span class="pyr-pct">89%</span></div>
+        </div>
+        <div class="bloom-axis">
+          <span class="ba-low"><span class="ba-dot"></span>Where most assessments stop</span>
+          <span class="ba-high">Where Siya keeps measuring<span class="ba-dot teal"></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT SIYA REVEALS ===== -->
+<section class="sec" id="reveals" data-chapter="What Siya reveals">
+  <div class="wrap">
+    <div class="head-block center r">
+      <p class="eyebrow" style="justify-content:center">Beyond marks</p>
+      <h2 class="campaign t-lg">What Siya reveals that a score never could.</h2>
+    </div>
+    <div class="reveal-grid" style="margin-top:44px">
+      <div class="reveal-card r r-blur"><span class="ic"><svg class="i i-lg" aria-hidden="true"><use href="#ic-search"/></svg></span><h3>Where comprehension breaks down</h3><p>The precise cognitive level where understanding stops, not just whether an answer was right or wrong.</p></div>
+      <div class="reveal-card r r-blur r-d1"><span class="ic"><svg class="i i-lg" aria-hidden="true"><use href="#ic-trend"/></svg></span><h3>Longitudinal learning trends</h3><p>Whether cohorts are improving, plateauing or declining, tracked across terms, not just exams.</p></div>
+      <div class="reveal-card r r-blur r-d2"><span class="ic"><svg class="i i-lg" aria-hidden="true"><use href="#ic-target"/></svg></span><h3>Targeted recommendations</h3><p>Specific, evidence-based next steps for teachers, not generic "needs improvement" notes.</p></div>
+      <div class="reveal-card r r-blur r-d3"><span class="ic"><svg class="i i-lg" aria-hidden="true"><use href="#ic-msg"/></svg></span><h3>Parent communication, simplified</h3><p>Clear, data-backed summaries that build trust and show your school's commitment to outcomes.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHO BENEFITS ===== -->
+<section class="sec aurora-sec" id="whom" data-chapter="For whom">
+  <div class="wrap">
+    <div class="head-block center r">
+      <p class="eyebrow" style="justify-content:center">For whom</p>
+      <h2 class="campaign t-lg">One investment. Three measurable outcomes.</h2>
+      <p class="lead">Grades 4–12 · CBSE, customised to your school.</p>
+    </div>
+    <div class="aud-grid" style="margin-top:48px">
+      <div class="aud-card r r-d1" data-tilt="5">
+        <img class="aud-mascot" src="assets/siya-professional.png" alt="Siya for school leadership">
+        <h3>For school leadership</h3>
+        <p class="sub">Transform assessment data into institutional intelligence.</p>
+        <div class="aud-mini"><div class="m"><div class="v">360°</div><div class="k">Learning dashboard</div></div><div class="m teal"><div class="v">Real-time</div><div class="k">Progress tracking</div></div></div>
+        <ul class="aud-list">
+          <li><svg class="i i-sm ck" aria-hidden="true"><use href="#ic-check"/></svg>Grade &amp; subject-level analytics</li>
+          <li><svg class="i i-sm ck" aria-hidden="true"><use href="#ic-check"/></svg>Teacher development insights</li>
+          <li><svg class="i i-sm ck" aria-hidden="true"><use href="#ic-check"/></svg>Auto-generated, board-ready reports</li>
+        </ul>
+      </div>
+      <div class="aud-card r r-d2" data-tilt="5">
+        <img class="aud-mascot" src="assets/siya-happy.png" alt="Siya for teachers">
+        <h3>For teachers</h3>
+        <p class="sub">Less time marking. More time teaching.</p>
+        <div class="aud-mini"><div class="m"><div class="v">11 hrs</div><div class="k">Saved per week</div></div><div class="m teal"><div class="v">Bloom's</div><div class="k">Cognitive mapping</div></div></div>
+        <ul class="aud-list">
+          <li><svg class="i i-sm ck" aria-hidden="true"><use href="#ic-check"/></svg>Per-student gap analysis in minutes</li>
+          <li><svg class="i i-sm ck" aria-hidden="true"><use href="#ic-check"/></svg>Bloom's cognitive mapping</li>
+          <li><svg class="i i-sm ck" aria-hidden="true"><use href="#ic-check"/></svg>Auto-generated remediation worksheets</li>
+        </ul>
+      </div>
+      <div class="aud-card r r-d3" data-tilt="5">
+        <img class="aud-mascot" src="assets/siya-love.png" alt="Siya for parents">
+        <h3>For parents</h3>
+        <p class="sub">A learning map, not just a scorecard.</p>
+        <div class="aud-mini"><div class="m"><div class="v">Weekly</div><div class="k">Insight reports</div></div><div class="m teal"><div class="v">91%</div><div class="k">Parent satisfaction</div></div></div>
+        <ul class="aud-list">
+          <li><svg class="i i-sm ck" aria-hidden="true"><use href="#ic-check"/></svg>Weekly progress beyond report cards</li>
+          <li><svg class="i i-sm ck" aria-hidden="true"><use href="#ic-check"/></svg>Jargon-free, actionable updates</li>
+          <li><svg class="i i-sm ck" aria-hidden="true"><use href="#ic-check"/></svg>Stronger school-parent trust</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS: PINNED STEPPER ===== -->
+<section class="scene how2 aurora-sec" id="how" data-chapter="How it works" data-scene data-steps="3" style="height:280vh">
+  <div class="pin">
+    <div class="wrap how2-grid">
+      <div class="how2-narrative">
+        <p class="eyebrow">How Siya works</p>
+        <h2 class="campaign t-lg">Upload a worksheet. Receive institutional clarity.</h2>
+        <ol class="xf-steps">
+          <li data-s="0"><b>Step 01 · Upload any assessment</b><span>Handwritten, printed, scanned or photographed. No special templates or prerequisites.</span></li>
+          <li data-s="1"><b>Step 02 · Siya analyses every response</b><span>Each answer mapped to a Bloom's level, aligned to competencies, scored automatically, in seconds.</span></li>
+          <li data-s="2"><b>Step 03 · Receive actionable reports</b><span>Per-student diagnostics, class patterns, parent-ready summaries and board-ready analytics.</span></li>
+        </ol>
+      </div>
+      <div class="how2-demo">
+        <!-- panel 0 -->
+        <div class="device hp hp-0 aurora-screen">
+          <div class="device-bar"><span class="dots"><i style="background:#FFB3BA"></i><i style="background:var(--siya-champagne)"></i><i style="background:var(--secondary-300)"></i></span><span class="title"><svg class="i i-sm" aria-hidden="true" style="color:var(--primary-600)"><use href="#ic-upload"/></svg> Upload Assessments</span><span class="pill-live"><span class="dot"></span>Ready</span></div>
+          <div class="ud-left" style="border:none">
+            <div class="ud-drop"><span class="ic"><svg class="i i-lg" aria-hidden="true"><use href="#ic-upload"/></svg></span><div class="t">Drop worksheets or assessments here</div><div class="s">Supports scans, photographs and PDFs, any handwriting style</div></div>
+            <div class="ud-file"><span class="fi"><svg class="i i-sm" aria-hidden="true"><use href="#ic-doc"/></svg></span><div style="flex:1"><div class="fn">Science_WS_6B_Feb14.pdf</div><div class="fm">31 students</div></div><span class="tag tag-ok"><svg class="i i-sm" aria-hidden="true"><use href="#ic-check"/></svg> Ready</span></div>
+            <div class="ud-file"><span class="fi"><svg class="i i-sm" aria-hidden="true"><use href="#ic-doc"/></svg></span><div style="flex:1"><div class="fn">Maths_Fractions_6A_Feb13.pdf</div><div class="fm">29 students</div></div><span class="tag tag-info">Analysing…</span></div>
+          </div>
+        </div>
+        <!-- panel 1 -->
+        <div class="device hp hp-1 aurora-screen">
+          <div class="device-bar"><span class="dots"><i style="background:#FFB3BA"></i><i style="background:var(--siya-champagne)"></i><i style="background:var(--secondary-300)"></i></span><span class="title"><svg class="i i-sm" aria-hidden="true" style="color:var(--primary-600)"><use href="#ic-chart"/></svg> Analysing · Science 6B</span><span class="pill-live"><span class="dot"></span>Processing</span></div>
+          <div class="ud-right">
+            <div style="font-family:var(--font-ui);font-weight:700;font-size:14px;color:var(--fg)">Bloom's breakdown · Class 6B</div>
+            <div class="ud-bloom">
+              <div class="ud-bloom-row"><span>Remember</span><div class="bar"><i data-bar="89"></i></div><span>89%</span></div>
+              <div class="ud-bloom-row"><span>Understand</span><div class="bar"><i data-bar="71"></i></div><span>71%</span></div>
+              <div class="ud-bloom-row"><span>Apply</span><div class="bar"><i data-bar="52"></i></div><span>52%</span></div>
+              <div class="ud-bloom-row"><span>Analyse</span><div class="bar"><i class="teal" data-bar="38"></i></div><span>38%</span></div>
+              <div class="ud-bloom-row"><span>Evaluate</span><div class="bar"><i class="teal" data-bar="22"></i></div><span>22%</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- panel 2 -->
+        <div class="device hp hp-2 aurora-screen">
+          <div class="device-bar"><span class="dots"><i style="background:#FFB3BA"></i><i style="background:var(--siya-champagne)"></i><i style="background:var(--secondary-300)"></i></span><span class="title"><svg class="i i-sm" aria-hidden="true" style="color:var(--primary-600)"><use href="#ic-spark"/></svg> Institutional Report</span><span class="pill-live"><span class="dot"></span>Complete</span></div>
+          <div class="ud-right" style="gap:14px">
+            <div class="ud-insight">
+              <img src="assets/siya-thinking.png" alt="" aria-hidden="true" style="width:42px;height:42px;object-fit:contain;flex:none">
+              <p class="it"><b style="font-family:var(--font-ui);color:var(--primary-800)">Institutional insight:</b> strong recall across the cohort, but a 38% drop at Analysis. Students recite principles but can't apply them. Recommend targeted application exercises before the next cycle.</p>
+            </div>
+            <div class="ud-file"><span class="fi" style="background:var(--secondary-100);color:var(--secondary-700)"><svg class="i i-sm" aria-hidden="true"><use href="#ic-msg"/></svg></span><div style="flex:1"><div class="fn">Parent communication, ready to send</div><div class="fm">"Kruthika shows strong recall but struggles with application-level questions…"</div></div><span class="tag tag-ok">Auto</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE FLOW: SCRUB SCENE ===== -->
+<section class="scene exp bg-soft" id="experience" data-chapter="The experience" data-scene data-steps="5" style="height:340vh">
+  <div class="pin">
+    <div class="wrap exp-grid">
+      <div class="exp-aside">
+        <p class="eyebrow">The Siya experience</p>
+        <h2 class="campaign t-lg">From worksheet to parent insight, automatically.</h2>
+        <p class="lead">No teacher action required. Siya compiles weekly patterns and delivers them, every Saturday.</p>
+        <div class="exp-rail">
+          <span class="exp-dot" data-s="0"><b>01</b></span>
+          <span class="exp-dot" data-s="1"><b>02</b></span>
+          <span class="exp-dot" data-s="2"><b>03</b></span>
+          <span class="exp-dot" data-s="3"><b>04</b></span>
+          <span class="exp-dot" data-s="4"><b>05</b></span>
+        </div>
+        <p class="exp-roll-hint"><svg class="dice-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/><circle cx="16" cy="16" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg> Tap a number to roll the die to that step</p>
+        <img src="assets/siya-peace.png" alt="" aria-hidden="true" class="float-slow exp-mascot" style="width:116px;margin-top:26px;filter:drop-shadow(0 16px 24px rgba(75,44,135,.18))">
+      </div>
+      <div class="exp-stage" aria-label="The five steps of the Siya experience, each rotating into focus as you scroll">
+        <div class="exp-drum">
+          <article class="exp-face" data-s="0">
+            <span class="exp-fnum">01</span>
+            <h3>Teacher uploads worksheet</h3>
+            <p>Any format: handwritten, printed or scanned. 31 students, 3 pages each, uploaded in one drop.</p>
+          </article>
+          <article class="exp-face" data-s="1">
+            <span class="exp-fnum">02</span>
+            <h3>Siya analyses every response</h3>
+            <p>Cognitive mapping, gap detection and Bloom's alignment for the whole class.</p>
+            <div class="chatline">"Across chapters we see a clear pattern: Kovi recalls concepts well (92%), but when asked to use that knowledge differently, he gets stuck (35%)."</div>
+          </article>
+          <article class="exp-face" data-s="2">
+            <span class="exp-fnum">03</span>
+            <h3>Subject-specific breakdown</h3>
+            <p>Newton's Laws: Kovi knew the law but couldn't connect it to a braking car. Spotted clearly, in context.</p>
+          </article>
+          <article class="exp-face" data-s="3">
+            <span class="exp-fnum">04</span>
+            <h3>Weekly insight triggered automatically</h3>
+            <p>Mon–Fri worksheets analysed. Friday 6 PM, Siya compiles patterns. Saturday 9 AM, every parent receives a personalised insight, zero teacher effort.</p>
+          </article>
+          <article class="exp-face" data-s="4">
+            <span class="exp-fnum teal">05</span>
+            <h3>Parent receives weekly insight</h3>
+            <p>Clear, actionable, jargon-free, every week.</p>
+            <div class="chatline teal">"Next time Kovi learns something, ask: 'Where have you seen this happen in real life?' This bridges what he knows to what he sees. We're already adapting his worksheets to practise this more."</div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMMUNITY ===== -->
+<section class="sec" id="community" data-chapter="Community">
+  <div class="wrap">
+    <div class="head-block center r">
+      <p class="eyebrow" style="justify-content:center">The Siya community</p>
+      <h2 class="campaign t-lg">Built by educators. Trusted by thousands.</h2>
+      <p class="lead">Every day, a growing network of schools and teachers powers deeper learning for students across India.</p>
+    </div>
+    <div class="comm-grid" style="margin-top:48px">
+      <div class="comm-card r r-d1"><span class="ic"><svg class="i i-lg" aria-hidden="true"><use href="#ic-users"/></svg></span><div class="n"><span data-count="2847">0</span>+</div><div class="h">Teaching community</div><p class="p">Educators across India using Siya to understand how their students think, not just what they score.</p></div>
+      <div class="comm-card r r-d2"><span class="ic"><svg class="i i-lg" aria-hidden="true"><use href="#ic-doc"/></svg></span><div class="n"><span data-count="8470">0</span>+</div><div class="h">Worksheets every day</div><p class="p">Handwritten, printed and scanned worksheets digitised and analysed, every single school day.</p></div>
+      <div class="comm-card r r-d3"><span class="ic"><svg class="i i-lg" aria-hidden="true"><use href="#ic-layers"/></svg></span><div class="n"><span data-count="1.14" data-dec="2">0</span>M+</div><div class="h">Answer sheets analysed</div><p class="p">Every response mapped to a cognitive level, every gap identified, every insight delivered to parents.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESULTS / TESTIMONIALS ===== -->
+<section class="sec aurora-sec" id="results" data-chapter="Results">
+  <div class="wrap">
+    <div class="head-block center r">
+      <p class="eyebrow" style="justify-content:center">Measurable outcomes</p>
+      <h2 class="campaign t-lg">Schools across India are already using Siya. Consistent results.</h2>
+      <p class="lead">Schools that digitised their assessments with Siya saw measurable improvement within one term.</p>
+    </div>
+    <div class="stat-grid r" style="margin-top:44px">
+      <div class="stat-card"><div class="n n-word">Live</div><div class="l">In schools across India &amp; growing</div></div>
+      <div class="stat-card teal"><div class="n"><span data-count="11">0</span>hrs</div><div class="l">Saved per teacher per week on marking</div></div>
+      <div class="stat-card"><div class="n"><span data-count="73">0</span>%</div><div class="l">Of students improve within one academic term</div></div>
+      <div class="stat-card teal"><div class="n"><span data-count="847">0</span>+</div><div class="l">Worksheets digitised daily across partners</div></div>
+    </div>
+
+    <div class="test-grid" id="testimonials" style="margin-top:24px">
+      <div class="test-card test-feature r">
+        <span class="tf-quote" aria-hidden="true">“</span>
+        <div class="tf-body">
+          <p class="q">"Siya has transformed how we approach assessments at Ocimum. We now have real-time data on every student's learning journey, enabling our teachers to intervene early and personalise instruction like never before."</p>
+          <div class="test-by"><span class="test-av">RN</span><span><span class="who">Dr. Rekha Nair</span><br><span class="role">Principal · Ocimum International School</span></span></div>
+        </div>
+        <img class="tf-mascot" src="assets/siya-professional.png" alt="" aria-hidden="true">
+      </div>
+      <div class="test-card r r-d1"><div class="stars">★★★★★</div><p class="q">"Siya gave us visibility we never had before. Within weeks, our teachers were making evidence-based instructional decisions instead of relying on intuition alone."</p><div class="test-by"><span class="test-av">PS</span><span><span class="who">Priya Sharma</span><br><span class="role">Academic Coordinator · DAV School · Delhi</span></span></div></div>
+      <div class="test-card r r-d2"><div class="stars">★★★★★</div><p class="q">"Our PTMs have completely transformed. Teachers walk in with specific, data-backed plans for every student. Parent confidence in our school has never been higher."</p><div class="test-by"><span class="test-av">RI</span><span><span class="who">Rajesh Iyer</span><br><span class="role">Headmaster · Kendriya Vidyalaya · Mumbai</span></span></div></div>
+      <div class="test-card r r-d3"><div class="stars">★★★★★</div><p class="q">"The board asked us to demonstrate learning outcomes beyond exam scores. Siya's analytics gave us exactly the evidence we needed, broken down by cognitive level."</p><div class="test-by"><span class="test-av">AD</span><span><span class="who">Ananya Das</span><br><span class="role">Senior Teacher · Master Minds · Hyderabad</span></span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRINCIPALS ===== -->
+<section class="sec" id="principals" data-chapter="For principals">
+  <div class="wrap princ-grid">
+    <div class="r r-left">
+      <p class="eyebrow">For principals</p>
+      <h2 class="campaign t-lg">Imagine if every parent received this from your school.</h2>
+      <p class="lead">Not marks. Not grades. A genuine window into how their child thinks, delivered weekly and automatically. When parents receive insight like this, they don't just appreciate your school. They champion it.</p>
+      <ul class="aud-list" style="margin-top:24px;gap:13px">
+        <li><svg class="i ck" aria-hidden="true"><use href="#ic-check"/></svg><span style="font-size:15.5px">Renewals go up. Referrals go up.</span></li>
+        <li><svg class="i ck" aria-hidden="true"><use href="#ic-check"/></svg><span style="font-size:15.5px">Trust becomes your strongest moat.</span></li>
+      </ul>
+      <a class="btn btn-primary btn-lg" href="#contact" style="margin-top:30px">Bring this to your school <svg class="i" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
+    </div>
+    <div class="r r-right">
+      <div class="insight-card" data-tilt="4">
+        <div class="ic-head">
+          <span class="av"><img src="assets/siya-wave-bowtie.png" alt="" aria-hidden="true" style="width:30px;height:30px;object-fit:contain"></span>
+          <div><div class="nm">Kovi's weekly insight</div><div class="rl">Class 6B · Science · Siya AI Companion</div></div>
+        </div>
+        <div class="ic-row"><span class="ric" style="background:var(--primary-100);color:var(--primary-700)"><svg class="i i-sm" aria-hidden="true"><use href="#ic-search"/></svg></span><div><div class="rt">Siya spotted a learning pattern</div><div class="rd">Kovi recalls concepts well, but struggles to apply them in new situations.</div></div></div>
+        <div class="ic-row"><span class="ric" style="background:var(--siya-champagne);color:#854D0E"><svg class="i i-sm" aria-hidden="true"><use href="#ic-target"/></svg></span><div><div class="rt">Exactly where the gap is</div><div class="rd">On Newton's Laws: he knew the law but couldn't connect it to a braking car.</div></div></div>
+        <div class="ic-row"><span class="ric" style="background:var(--secondary-100);color:var(--secondary-700)"><svg class="i i-sm" aria-hidden="true"><use href="#ic-msg"/></svg></span><div><div class="rt">A simple nudge for home</div><div class="rd">"Ask Kovi: where have you seen this happen in real life?"</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="sec cta" id="contact" data-chapter="Get started">
+  <div class="wrap">
+    <div class="cta-card cta-landscape">
+      <div class="orb orb-lav" data-depth="0.05" style="width:280px;height:280px;top:-110px;left:-50px;opacity:.22"></div>
+      <div class="orb orb-teal" data-depth="0.07" style="width:240px;height:240px;bottom:-110px;right:-30px;opacity:.16"></div>
+      <div class="cta-grid">
+        <div class="r r-left">
+          <p class="eyebrow on-dark">Take the next step</p>
+          <h2 class="campaign t-lg">800 pages per student. Every signal finally captured.</h2>
+          <p class="lead">Join schools across India turning their assessment data into actionable learning intelligence.</p>
+          <ul class="cta-list cta-row">
+            <li><svg class="i ck" aria-hidden="true"><use href="#ic-check"/></svg>Complimentary pilot</li>
+            <li><svg class="i ck" aria-hidden="true"><use href="#ic-check"/></svg>Live in one week</li>
+            <li><svg class="i ck" aria-hidden="true"><use href="#ic-check"/></svg>Any worksheet format</li>
+          </ul>
+          <div class="hero-cta" style="margin-top:30px">
+            <a class="btn btn-on-dark btn-lg" href="https://heysiya.ai" target="_blank" rel="noopener">Schedule a school walkthrough <svg class="i" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
+          </div>
+        </div>
+        <div class="r r-right cta-stage">
+          <div class="cta-halo" aria-hidden="true"></div>
+          <img class="cta-mascot float" src="assets/siya-graduate.png" alt="Siya, ready to help your school">
+          <div class="cta-chip">
+            <span class="ic"><svg class="i" aria-hidden="true"><use href="#ic-layers"/></svg></span>
+            <span><span class="k">1.14M+</span><span class="l">sheets analysed</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <img class="foot-logo" src="assets/siya-logo-white.png" alt="Siya">
+        <p class="foot-tag">An AI companion for schools: observational intelligence that helps teachers, principals and parents truly know students, not just their scores.</p>
+      </div>
+      <div class="foot-col"><h4>Product</h4><a href="#how">How it works</a><a href="#whom">For whom</a><a href="#framework">The framework</a><a href="#results">Results</a></div>
+      <div class="foot-col"><h4>Audiences</h4><a href="#whom">For schools</a><a href="#whom">For teachers</a><a href="#whom">For parents</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="https://heysiya.ai" target="_blank" rel="noopener">heysiya.ai</a><a href="#testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#contact">Privacy</a></div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2025 Siya · heysiya.ai</span>
+      <span>Make Time for What Matters.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="siya.js"></script>
+<script src="siya-micro.js"></script>
+<script src="siya-hero.js"></script>
+<script src="siya-aurora.js"></script>
+</body>
+</html>
