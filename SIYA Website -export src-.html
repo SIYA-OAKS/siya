@@ -22,16 +22,10 @@
   <link rel="canonical" href="https://heysiya.ai/">
   <meta name="theme-color" content="#A084E8">
   <meta name="ext-resource-dependency" content="https://cdn.jsdelivr.net/gh/akzhy/Vara@master/fonts/Satisfy/SatisfySL.json" data-resource-id="varaFont" />
-  <template id="__bundler_thumbnail" data-bg-color="#A084E8">
+  <template id="__bundler_thumbnail" data-bg-color="#ffffff">
     <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-      <rect width="1200" height="800" fill="#A084E8"></rect>
-      <circle cx="600" cy="400" r="170" fill="#C6B6F5"></circle>
-      <circle cx="545" cy="380" r="40" fill="none" stroke="#010101" stroke-width="8"></circle>
-      <circle cx="655" cy="380" r="40" fill="none" stroke="#010101" stroke-width="8"></circle>
-      <line x1="585" y1="380" x2="615" y2="380" stroke="#010101" stroke-width="8"></line>
-      <circle cx="545" cy="380" r="14" fill="#010101"></circle>
-      <circle cx="655" cy="380" r="14" fill="#010101"></circle>
-      <path d="M560 470 Q600 500 640 470" fill="none" stroke="#010101" stroke-width="9" stroke-linecap="round"></path>
+      <rect width="1200" height="800" fill="#ffffff"></rect>
+      <text x="600" y="420" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="84" font-weight="700" letter-spacing="-2" fill="#A084E8">siya</text>
     </svg>
   </template>
 
@@ -95,6 +89,15 @@
 </head>
 <body id="top">
 
+<div id="siya-loader" role="status" aria-live="polite" aria-label="Loading Siya">
+  <div class="sl-inner">
+    <div class="sl-glow" aria-hidden="true"></div>
+    <img src="assets/siya-happy.webp" alt="" class="sl-mascot" decoding="async">
+    <img src="assets/siya-logo-lavender.png" alt="Siya" class="sl-logo" decoding="async">
+    <div class="sl-bar" aria-hidden="true"><span></span></div>
+  </div>
+</div>
+
 <a class="skip-link" href="#main">Skip to content</a>
 
 <div id="progress" aria-hidden="true"></div>
@@ -136,13 +139,13 @@
       <a class="nav-link" href="#whom">For whom</a>
       <a class="nav-link" href="#results">Results</a>
       <a class="nav-link" href="#testimonials">Testimonials</a>
-      <a class="nav-link" href="#contact">Contact</a>
-      <a class="btn btn-primary nav-drawer-cta" href="#contact">Schedule a walkthrough <svg class="i i-sm" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
+      <a class="nav-link" href="https://app.heysiya.ai/contact-support">Contact</a>
+      <a class="btn btn-primary nav-drawer-cta" href="https://app.heysiya.ai/contact-support">Schedule a walkthrough <svg class="i i-sm" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
       <a class="btn btn-ghost nav-drawer-login" href="https://app.heysiya.ai"><svg class="i i-sm" aria-hidden="true"><use href="#ic-login"/></svg> Log in</a>
     </nav>
     <div class="nav-actions">
+      <a class="btn btn-primary nav-cta" href="https://app.heysiya.ai/contact-support">Schedule a walkthrough <svg class="i i-sm" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
       <a class="btn btn-ghost nav-login" href="https://app.heysiya.ai"><svg class="i i-sm" aria-hidden="true"><use href="#ic-login"/></svg> Log in</a>
-      <a class="btn btn-primary nav-cta" href="#contact">Schedule a walkthrough <svg class="i i-sm" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
         <svg class="i themo-sun" aria-hidden="true"><use href="#ic-sun"/></svg>
         <svg class="i themo-moon" aria-hidden="true"><use href="#ic-moon"/></svg>
@@ -168,7 +171,7 @@
     <p class="hero-strike tl" style="--tld: 0.42s; line-height: 1.25">Every term, it quietly gets <span class="strike-word">thrown away</span>.</p>
     <p class="lead tl" style="--tld:0.52s">Siya turns every worksheet into cognitive insight so nothing a student tells you gets lost.</p>
     <div class="hero-cta tl" style="--tld:0.62s">
-      <a class="btn btn-primary btn-lg" href="#contact">Schedule a walkthrough <svg class="i" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
+      <a class="btn btn-primary btn-lg" href="https://app.heysiya.ai/contact-support">Schedule a walkthrough <svg class="i" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
       <a class="btn btn-ghost btn-lg" href="#how">See how Siya works</a>
     </div>
     <div class="hero-note tl" style="--tld:0.72s">
@@ -307,7 +310,7 @@
   <div class="orb orb-lav" data-depth="0.05" style="width:420px;height:420px;top:-120px;left:-90px;opacity:.16"></div>
   <div class="orb orb-teal" data-depth="0.06" style="width:340px;height:340px;bottom:-120px;right:-70px;opacity:.12"></div>
   <div class="wrap mani-wrap">
-    <p class="eyebrow mani-eyebrow r" style="justify-content:center">✦ Why we built Siya</p>
+    <p class="eyebrow mani-eyebrow r" style="justify-content:center">Why we built Siya</p>
     <h2 class="mani-title r">The reason behind every worksheet we read.</h2>
     <p class="mani-sub r r-d1">A short note from the people who built Siya.</p>
 
@@ -316,12 +319,12 @@
         <span class="note-tape" aria-hidden="true"></span>
         <div class="note-ink">
           <div class="vara-note" id="varaNote"></div>
-          <p class="note-fallback mani-hand" data-lines="Every teacher deserves to leave|school still carrying the joy of it.|Let the paperwork stay behind.|Siya is here to carry it for you." aria-label="Every teacher deserves to leave school still carrying the joy of it. Let the paperwork stay behind. Siya is here to carry it for you."></p>
+          <p class="note-fallback mani-hand" data-lines="Teachers carry enough already.|We built Siya to carry the paperwork,|so they can carry|the joy of teaching." aria-label="Teachers carry enough already. We built Siya to carry the paperwork, so they can carry the joy of teaching."></p>
         </div>
       </div>
       <img loading="lazy" decoding="async" class="climb-mascot" id="climbMascot" src="assets/siya-happy.webp" alt="" aria-hidden="true">
     </div>
-    <p class="note-sign r r-d1">With care,<br>the Siya team</p>
+    <p class="note-sign">With love,<br>the Siya team</p>
   </div>
 </section>
 
@@ -503,7 +506,7 @@
     </div>
     <div class="aud-grid" style="margin-top:48px">
       <div class="aud-card r r-d1">
-        <img loading="lazy" decoding="async" class="aud-mascot" src="assets/siya-professional.webp" alt="Siya for school leadership">
+        <img loading="lazy" decoding="async" class="aud-mascot" src="assets/siya-leadership-briefcase.png" alt="Siya for school leadership">
         <h3>For school leadership</h3>
         <p class="sub">Know which class needs help, well before the term ends.</p>
         <div class="aud-mini"><div class="m"><div class="v">360°</div><div class="k">Learning dashboard</div></div><div class="m teal"><div class="v">Real-time</div><div class="k">Progress tracking</div></div></div>
@@ -601,7 +604,7 @@
 </section>
 
 <!-- ===== EXPERIENCE FLOW: SCRUB SCENE ===== -->
-<section class="scene exp bg-soft" id="experience" data-chapter="The experience" data-scene data-steps="5" style="height:340vh">
+<section class="scene exp aurora-sec" id="experience" data-chapter="The experience" data-scene data-steps="5" style="height:340vh">
   <div class="pin">
     <div class="wrap exp-grid">
       <div class="exp-aside">
@@ -658,7 +661,7 @@
   <span id="testimonials" class="anchor-alias" aria-hidden="true"></span>
   <div class="wrap">
     <div class="head-block center r">
-      <p class="eyebrow" style="justify-content:center">✦ In their words</p>
+      <p class="eyebrow" style="justify-content:center">In their words</p>
       <h2 class="campaign t-lg">The people who lead schools, in their own words.</h2>
       <p class="lead">What changes when a school stops guessing, and starts seeing every child clearly.</p>
     </div>
@@ -715,7 +718,7 @@
         <li><svg class="i ck" aria-hidden="true"><use href="#ic-check"/></svg><span style="font-size:15.5px">Renewals go up. Referrals go up.</span></li>
         <li><svg class="i ck" aria-hidden="true"><use href="#ic-check"/></svg><span style="font-size:15.5px">Trust becomes the reason families stay, and the reason new ones arrive.</span></li>
       </ul>
-      <a class="btn btn-primary btn-lg" href="#contact" style="margin-top:30px">Bring this to your school <svg class="i" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
+      <a class="btn btn-primary btn-lg" href="https://app.heysiya.ai/contact-support" style="margin-top:30px">Bring this to your school <svg class="i" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
     </div>
     <div class="r r-right">
       <div class="insight-card" data-tilt="4">
@@ -742,14 +745,9 @@
           <p class="eyebrow on-dark">Take the next step</p>
           <h2 class="campaign t-lg">800 pages per student, every year. Every signal finally captured.</h2>
           <p class="lead">Join schools across India that finally hear what every worksheet has been saying.</p>
-          <ul class="cta-list cta-row">
-            <li><svg class="i ck" aria-hidden="true"><use href="#ic-check"/></svg>Complimentary pilot</li>
-            <li><svg class="i ck" aria-hidden="true"><use href="#ic-check"/></svg>Live in one week</li>
-            <li><svg class="i ck" aria-hidden="true"><use href="#ic-check"/></svg>Any worksheet format</li>
-          </ul>
           <p class="cta-trust"><svg class="i i-sm" aria-hidden="true"><use href="#ic-check"/></svg><span>Your school's data stays yours. Encrypted, private, and never sold.</span></p>
           <div class="hero-cta" style="margin-top:22px">
-            <a class="btn btn-on-dark btn-lg" href="https://heysiya.ai" target="_blank" rel="noopener">Schedule a school walkthrough <svg class="i" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
+            <a class="btn btn-on-dark btn-lg" href="https://app.heysiya.ai/contact-support">Schedule a school walkthrough <svg class="i" aria-hidden="true"><use href="#ic-arrow"/></svg></a>
           </div>
         </div>
         <div class="r r-right cta-stage">
@@ -777,7 +775,7 @@
       </div>
       <div class="foot-col"><h4>Product</h4><a href="#how">How it works</a><a href="#whom">For whom</a><a href="#framework">The framework</a><a href="#results">Results</a></div>
       <div class="foot-col"><h4>Audiences</h4><a href="#whom">For schools</a><a href="#whom">For teachers</a><a href="#whom">For parents</a></div>
-      <div class="foot-col"><h4>Company</h4><a href="https://heysiya.ai" target="_blank" rel="noopener">heysiya.ai</a><a href="#testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#contact">Privacy</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="https://heysiya.ai" target="_blank" rel="noopener">heysiya.ai</a><a href="#testimonials">Testimonials</a><a href="https://app.heysiya.ai/contact-support">Contact</a><a href="https://app.heysiya.ai/contact-support">Privacy</a></div>
     </div>
     <div class="foot-bot">
       <span>© 2026 Siya · heysiya.ai</span>
@@ -793,5 +791,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vara@1.4.1/src/vara.min.js"></script>
 <script src="siya-write-export.js"></script>
+<script>
+(function(){
+  var loader = document.getElementById('siya-loader');
+  if (!loader) return;
+  function hide(){
+    if (loader.classList.contains('done')) return;
+    loader.classList.add('done');
+    setTimeout(function(){ if (loader && loader.parentNode) loader.parentNode.removeChild(loader); }, 640);
+  }
+  // hide once everything (fonts, images) is ready, with a graceful minimum + hard cap
+  var MIN = 550, started = Date.now();
+  function finish(){ var wait = Math.max(0, MIN - (Date.now() - started)); setTimeout(hide, wait); }
+  if (document.readyState === 'complete') finish();
+  else window.addEventListener('load', finish);
+  setTimeout(hide, 5000); // safety cap — never trap the user
+})();
+</script>
 </body>
 </html>
