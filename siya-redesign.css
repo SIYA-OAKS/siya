@@ -620,6 +620,15 @@ html[data-theme="dark"] .chatline.teal {
 @media (max-width: 1000px) {
   .bloom-side { margin-top: 10px; }
 }
+@media (max-width: 560px) {
+  .bloom-axis { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .bloom-axis .ba-high { display: flex; align-items: center; }
+  .bloom-axis .ba-dot { margin: 0 6px 0 0; }
+  .bloom-axis .ba-high .ba-dot { order: -1; margin: 0 6px 0 0; }
+}
+@media (max-width: 1000px) {
+  #framework .pin { padding-bottom: clamp(24px, 4vw, 40px); }
+}
 
 /* 12.3 Final CTA — glow halo + floating proof chip around the mascot */
 .cta-stage { position: relative; display: grid; place-items: center; min-height: 320px; }

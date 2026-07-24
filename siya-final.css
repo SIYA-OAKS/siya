@@ -1038,6 +1038,7 @@ html.no-js #siya-loader { display: none; }
   }
   .reveal-words .wln { white-space: normal; }
   /* file names etc. inside the demo never push width out */
+  .ud-file > div { min-width: 0; }
   .ud-file .fn, .ud-file .fm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 }
 
