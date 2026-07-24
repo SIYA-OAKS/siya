@@ -33,8 +33,9 @@
   <meta name="twitter:title" content="Siya. Every page. Every insight.">
   <meta name="twitter:description" content="Siya turns every worksheet into actionable cognitive insight, automatically.">
 
-  <link rel="apple-touch-icon" href="assets/siya-logo-lavender.png">
-  <link rel="icon" type="image/png" href="assets/siya-logo-lavender.png">
+  <link rel="apple-touch-icon" href="assets/siya-favicon-180.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="assets/siya-favicon.png">
+  <link rel="shortcut icon" href="assets/siya-favicon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,6 +81,15 @@
   </style>
 </head>
 <body id="top">
+
+<div id="siya-loader" role="status" aria-live="polite" aria-label="Loading Siya">
+  <div class="sl-inner">
+    <div class="sl-glow" aria-hidden="true"></div>
+    <img src="assets/siya-happy.webp" alt="" class="sl-mascot" decoding="async">
+    <img src="assets/siya-logo-lavender.png" alt="Siya" class="sl-logo" decoding="async">
+    <div class="sl-bar" aria-hidden="true"><span></span></div>
+  </div>
+</div>
 
 <a class="skip-link" href="#main">Skip to content</a>
 
@@ -774,5 +784,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vara@1.4.1/src/vara.min.js"></script>
 <script src="siya-write.js"></script>
+<script>
+(function(){
+  var loader = document.getElementById('siya-loader');
+  if (!loader) return;
+  function hide(){
+    if (loader.classList.contains('done')) return;
+    loader.classList.add('done');
+    setTimeout(function(){ if (loader && loader.parentNode) loader.parentNode.removeChild(loader); }, 640);
+  }
+  // hide once everything (fonts, images) is ready, with a graceful minimum + hard cap
+  var MIN = 550, started = Date.now();
+  function finish(){ var wait = Math.max(0, MIN - (Date.now() - started)); setTimeout(hide, wait); }
+  if (document.readyState === 'complete') finish();
+  else window.addEventListener('load', finish);
+  setTimeout(hide, 5000); // safety cap — never trap the user
+})();
+</script>
 </body>
 </html>

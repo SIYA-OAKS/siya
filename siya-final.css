@@ -918,3 +918,140 @@ html[data-theme="dark"] .ts-quote em { color: #C6B6F5; }
     gap: 8px; width: 100%; margin-top: 10px;
   }
 }
+
+
+/* =========================================================================
+   ============  SIYA PAGE LOADER — mascot while data loads  ===============
+   ========================================================================= */
+#siya-loader {
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  background: var(--surface, #fff);
+  transition: opacity .5s var(--ease-out), visibility .5s var(--ease-out);
+}
+html[data-theme="dark"] #siya-loader { background: #131316; }
+#siya-loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.sl-inner { position: relative; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.sl-glow {
+  position: absolute; top: -34px; left: 50%; width: 220px; height: 220px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(160,132,232,0.34), rgba(160,132,232,0) 68%);
+  filter: blur(6px); border-radius: 50%;
+  animation: sl-breathe 2.4s var(--ease-out) infinite;
+}
+.sl-mascot {
+  position: relative; width: 108px; height: auto; display: block;
+  animation: sl-bob 1.9s var(--ease-out) infinite;
+  filter: drop-shadow(0 16px 26px rgba(75,44,135,0.22));
+}
+.sl-logo { height: 26px; width: auto; opacity: .9; }
+.sl-bar {
+  width: 148px; height: 5px; border-radius: 999px; overflow: hidden;
+  background: var(--primary-100, #EDE7FB);
+}
+html[data-theme="dark"] .sl-bar { background: rgba(255,255,255,0.12); }
+.sl-bar span {
+  display: block; height: 100%; width: 40%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary-400,#B49BF0), var(--secondary-500,#2CD3C0));
+  animation: sl-slide 1.15s var(--ease-out) infinite;
+}
+@keyframes sl-bob { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-11px) } }
+@keyframes sl-breathe { 0%,100%{ opacity:.55; transform: translateX(-50%) scale(.92) } 50%{ opacity:1; transform: translateX(-50%) scale(1.06) } }
+@keyframes sl-slide { 0%{ transform: translateX(-120%) } 100%{ transform: translateX(360%) } }
+
+/* if JS never runs, don't trap the page behind the loader */
+html.no-js #siya-loader { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .sl-mascot, .sl-glow, .sl-bar span { animation: none; }
+  .sl-bar span { width: 100%; }
+}
+@media print { #siya-loader { display: none !important; } }
+
+
+/* =========================================================================
+   ============  MOBILE FOLD REPAIR (loads last — wins on source order) =====
+   The experience/"dice" stage kept a fixed 460px height from siya-aurora.css
+   (which loads after the redesign unpin rule), so its 5 stacked cards
+   overflowed and collided on phones. Force the whole scene to flow.
+   ========================================================================= */
+@media (max-width: 1000px) {
+  /* every pinned cinematic scene flows inline on mobile */
+  .scene { height: auto !important; }
+  .scene .pin { position: static !important; height: auto !important; min-height: 0 !important; overflow: visible !important; }
+
+  /* THE dice fold: kill the fixed stage height + 3D, stack the faces */
+  #experience { height: auto !important; }
+  .exp-stage { height: auto !important; min-height: 0 !important; perspective: none !important; }
+  .exp-drum { position: static !important; height: auto !important; max-width: none !important; transform: none !important; transform-style: flat !important; }
+  .exp-stage .exp-face {
+    position: relative !important; inset: auto !important; transform: none !important;
+    opacity: 1 !important; filter: none !important; backface-visibility: visible !important;
+    width: 100% !important; height: auto !important; min-height: 0 !important;
+    backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+  }
+  .exp-stage .exp-face + .exp-face { margin-top: 16px; }
+  .exp-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+}
+
+/* dark theme, mobile: the how-it-works / transformation steps are forced to a
+   white background by the base mobile rule — that hides the light step text.
+   Repaint every step as a dark translucent card with readable light type. */
+@media (max-width: 1000px) {
+  html[data-theme="dark"] .xf-steps li {
+    background: rgba(160,132,232,0.10) !important;
+    border-color: rgba(160,132,232,0.28) !important;
+    box-shadow: none !important;
+  }
+  html[data-theme="dark"] .xf-steps li b { color: #F3F1F8 !important; }
+  html[data-theme="dark"] .xf-steps li span { color: #B7B3C6 !important; }
+}
+
+/* small phones: tighten inner padding + type so cards never overflow the edge */
+@media (max-width: 480px) {
+  .wrap { padding-inline: 18px; }
+  .exp-stage .exp-face { padding: 22px 20px; }
+  .exp-face h3 { font-size: 19px; }
+  .band-grid { gap: 14px; }
+  .aud-card { padding: 24px 22px; }
+}
+
+/* =========================================================================
+   ============  MOBILE HARDENING — footer + How-it-works fit  =============
+   Two reported breaks on phones:
+   (1) The footer link grid stayed 4-col so the last column ran off-screen.
+   (2) The "How Siya works" headline was clipped: a wide child forced the
+       grid wider than the viewport, and body{overflow-x:clip} hid the excess
+       (pushing "stands." off the right edge). Fix = collapse the grids to one
+       column, zero out grid/flex min-width so nothing can force overflow, and
+       let long headlines/URLs wrap.
+   ========================================================================= */
+@media (max-width: 1000px) {
+  /* nothing may exceed the viewport width */
+  .how2-grid, .xf-grid, .exp-grid { grid-template-columns: 1fr !important; }
+  .how2-grid > *, .xf-grid > *, .exp-grid > *,
+  .how2-narrative, .how2-demo { min-width: 0 !important; }
+  .how2-demo, .how2-demo .hp, .device, .aurora-screen { max-width: 100% !important; }
+  /* headlines wrap fully instead of being clipped */
+  .how2 .campaign, .xf .campaign, section h2.campaign {
+    overflow-wrap: break-word; word-break: normal; hyphens: none;
+  }
+  .reveal-words .wln { white-space: normal; }
+  /* file names etc. inside the demo never push width out */
+  .ud-file .fn, .ud-file .fm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+/* Footer: brand block full-width, link columns 2-up (stack on tiny phones) */
+@media (max-width: 900px) {
+  .foot-top {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 30px 24px !important;
+  }
+  .foot-top > :first-child { grid-column: 1 / -1; }
+  .foot-tag { max-width: none; }
+}
+@media (max-width: 460px) {
+  .foot-top { grid-template-columns: 1fr !important; gap: 26px !important; }
+  .foot-bot { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .foot-col a { word-break: break-word; }
+}
